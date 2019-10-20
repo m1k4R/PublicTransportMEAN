@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const admin = require('../controllers/admin.controller');
+const checkAuth = require('../middleware/check-auth');  // path, checkAuth, function
 
 router.post('/addLine', admin.createLine);  // '/' + /addLine ili /addLine/
 router.get('/getLine/:lineId', admin.getLine);   // getLine?lineId= je u angularu vrv treba promjeniti

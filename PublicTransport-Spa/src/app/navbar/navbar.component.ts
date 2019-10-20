@@ -48,7 +48,8 @@ export class NavbarComponent implements OnInit {
     localStorage.removeItem('user');
     this.authService.decodedToken = null;
     this.authService.currentUser = null;
-    this.authService.userRoles = null;
+    // this.authService.userRoles = null;
+    this.authService.userRole = null;
     this.alertify.message('logged out');
     this.router.navigate(['/home']);
   }

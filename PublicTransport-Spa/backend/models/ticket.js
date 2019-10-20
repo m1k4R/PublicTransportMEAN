@@ -10,7 +10,7 @@ const TicketSchema = new Schema ({
   dateOfIssue: { type: Date},
   ticketType: { type: String},
   isValid: { type: Boolean},
-  user: { type: UserSchema},
+  user: { type: Schema.Types.ObjectID, ref: 'User'},
   priceInfo: { type: PricelistItemSchema}
 });
 
