@@ -1,0 +1,124 @@
+<div class="p-sm-5 p-2 bg-secondary">
+  <div class="container-fluid">
+      <!-- title -->
+      <div hidden class="row">
+        <div class="col text-center mb-3">
+          <h1 class="text-warning display-2">Tickets</h1>
+          <p class="lead text-light">
+            Here you can see all tickets we offer and their prices.
+          </p>
+        </div>
+      </div>
+      <!-- end of title -->
+      <div class="row">
+        <div class="col-lg-3 col-sm-10 mx-auto mb-4"> <!-- *ngFor="let ticket of pricelists" -->
+          <div class="card moiClassTicketBorder">
+            <div class="card-body">
+              <div class="card-title">
+                <h3 class="text-muted font-weight-bolder">{{pricelists?.item?.typeH}}</h3>
+              </div>
+              <hr>
+              <div class="card-subtitle">
+                <p class="lead">This ticket is valid just for one hour</p> <!-- {{pricelists.item?.description}} -->
+              </div>
+              <hr>
+              <div class="text-right d-inline">
+                <p class="font-weight-bold" color="black" style="font-size: 20px"><a href="#"
+                  ><i class="fa fa-ticket mx-2 text-primary moiClassTicketIcon"></i
+                ></a>{{pricelists?.priceH}} RSD</p>
+              </div>
+              <!-- Buy ticket -->
+              <div class="text-center mt-2">
+                <button class="btn btn-default border-dark moiClassTicketHover"
+                (click)="buy(pricelists?.item?.typeH, pricelists?.priceH)"
+                >Buy Ticket</button>  <!-- [disabled]="ticket.item.type !== 'Hourly' && !loggedIn()" -->
+              </div> <!-- (click)="buyTicket(ticket.item.type)" -->
+            </div>
+          </div>
+          <div class="card moiClassTicketBorder">
+            <div class="card-body">
+              <div class="card-title">
+                <h3 class="text-muted font-weight-bolder">{{pricelists?.item?.typeD}}</h3>
+              </div>
+              <hr>
+              <div class="card-subtitle">
+                <p class="lead">This ticket is valid until 00:00 next day</p> <!-- {{pricelists.item?.description}} -->
+              </div>
+              <hr>
+              <div class="text-right d-inline">
+                <p class="font-weight-bold" style="font-size: 20px"><a href="#"
+                  ><i class="fa fa-ticket mx-2 text-primary moiClassTicketIcon"></i
+                ></a>{{pricelists?.priceD}} RSD</p>
+              </div>
+              <!-- Buy ticket -->
+              <div class="text-center mt-2">
+                <button class="btn btn-default border-dark moiClassTicketHover"
+                (click)="buy(pricelists?.item?.typeD, pricelists?.priceD)"
+                [disabled]="!loggedIn()">Buy Ticket</button>  <!-- [disabled]="ticket.item.type !== 'Hourly' && !loggedIn()" -->
+              </div> <!-- (click)="buyTicket(ticket.item.type)" -->
+            </div>
+          </div>
+          <div class="card moiClassTicketBorder">
+            <div class="card-body">
+              <div class="card-title">
+                <h3 class="text-muted font-weight-bolder">{{pricelists?.item?.typeM}}</h3>
+              </div>
+              <hr>
+              <div class="card-subtitle">
+                <p class="lead">This ticket is valid for one month</p> <!-- {{pricelists.item?.description}} -->
+              </div>
+              <hr>
+              <div class="text-right d-inline">
+                <p class="font-weight-bold" style="font-size: 20px"><a href="#"
+                  ><i class="fa fa-ticket mx-2 text-primary moiClassTicketIcon"></i
+                ></a>{{pricelists?.priceM}} RSD</p>
+              </div>
+              <!-- Buy ticket -->
+              <div class="text-center mt-2">
+                <button class="btn btn-default border-dark moiClassTicketHover"
+                (click)="buy(pricelists?.item?.typeM, pricelists?.priceM)"
+                [disabled]="!loggedIn()">Buy Ticket</button>  <!-- [disabled]="ticket.item.type !== 'Hourly' && !loggedIn()" -->
+              </div> <!-- (click)="buyTicket(ticket.item.type)" -->
+            </div>
+          </div>
+          <div class="card moiClassTicketBorder">
+            <div class="card-body">
+              <div class="card-title">
+                <h3 class="text-muted font-weight-bolder">{{pricelists?.item?.typeA}}</h3>
+              </div>
+              <hr>
+              <div class="card-subtitle">
+                <p class="lead">This ticket is valid for one year</p> <!-- {{pricelists.item?.description}} -->
+              </div>
+              <hr>
+              <div class="text-right d-inline">
+                <p class="font-weight-bold" style="font-size: 20px"><a href="#"
+                  ><i class="fa fa-ticket mx-2 text-primary moiClassTicketIcon"></i
+                ></a>{{pricelists?.priceA}} RSD</p>
+              </div>
+              <!-- Buy ticket -->
+              <div class="text-center mt-2">
+                <button class="btn btn-default border-dark moiClassTicketHover"
+                (click)="buy(pricelists?.item?.typeA, pricelists?.priceA)"
+                [disabled]="!loggedIn()">Buy Ticket</button>  <!-- [disabled]="ticket.item.type !== 'Hourly' && !loggedIn()" -->
+              </div> <!-- (click)="buyTicket(ticket.item.type)" -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <hr style="border: 2px solid white;">
+      <br>
+      <div *ngIf="!loggedIn()" class="row justify-content-center text-center mb-3">
+          <form #emailForm="ngForm" class="form-signin form-inline">
+            <label class="text-white font-weight-bolder mr-2" style="font-size: 20px" for="email">Please enter your email:</label>
+            <input type="email" name="email" id="inputEmail" class="form-control"
+               placeholder="Email address" required autofocus [(ngModel)]="email">
+          </form>
+      </div>
+      <!-- PayPal -->
+      <div class="row justify-content-center text-center mb-3" id="paypal-checkout-btn">
+        <!-- <ngx-paypal [config]="payPalConfig"></ngx-paypal> -->
+      </div>
+    </div>
+  </div>

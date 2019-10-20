@@ -1,0 +1,48 @@
+<div class="row jumbotron-fluid moiClassView p-2 m-0" style="font-size: 14px">
+  <div class="col">
+    <table class="table table-striped table-dark moiClassTimeTable" style="font-size: 16px">
+      <thead>
+        <tr>
+          <th scope="col" colspan="7" style="font-size: 20px">Lines</th>
+        </tr>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Line Number</th>
+          <th scope="col">Name</th>
+          <th scope="col" class="moiClassShowLines">
+            <a (click)="isCollapsedStations = !isCollapsedStations" [attr.aria-expanded]="!isCollapsedStations"
+              aria-controls="collapseBasic">
+              Show Stations</a>
+          </th>
+          <th scope="col" class="moiClassShowLines">
+            <a (click)="isCollapsedBuses = !isCollapsedBuses" [attr.aria-expanded]="!isCollapsedBuses"
+              aria-controls="collapseBasic">
+              Show Buses</a>
+          </th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let line of allLines">
+          <th scope="row">{{line?._id}}</th>
+          <td>{{line?.lineNumber}}</td>
+          <td style="font-size: 12px">{{line?.name}}</td>
+          <td>
+            <ul id="collapseBasic" [collapse]="isCollapsedStations" [isAnimated]="true" class="text-white">
+              <li *ngFor="let station of line.stations"><a>{{station.name}}</a> </li>
+            </ul>
+          </td>
+          <td>
+            <ul id="collapseBasic" [collapse]="isCollapsedBuses" [isAnimated]="true" class="text-white">
+              <li *ngFor="let bus of line.buses" (click)="deleteLine(line?._id)"><a>{{bus.busNumber}}</a> </li>
+            </ul>
+          </td>
+          <td><button [routerLink]="['/newLine',{lineId: line._id}]" routerLinkActive="router-link-active"
+              class="btn btn-default moiClassButton">Edit</button></td>
+          <td><i class="fa fa-trash moiClassButtonTable" (click)="deleteLine(line._id)"></i></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

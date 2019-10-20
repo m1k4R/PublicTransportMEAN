@@ -1,0 +1,143 @@
+<nav [ngClass]="{'navbar navbar-expand-md navbar-light p-0': isAdmin() || isController()}">
+
+  <div class="">
+    <div [ngClass]="{'container-fluid':isAdmin() || isController()}">
+      <div [ngClass]="{'row': isAdmin() || isController()}">
+        <!-- SIDEBAR -->
+        <div *ngIf="isAdmin() || isController()" class="col-xl-2 col-lg-3 col-md-4 sidebar fixed-top">
+          <div class="row bottom-border pb-3 pt-3">
+            <div class="col-3" *ngIf="isAdmin()">
+              <img src="../../assets/3018548-512.png" alt="Admin image" width="70" height="60"/>
+            </div>
+            <div class="col-3" *ngIf="isController()">
+              <img src="../../assets/3018587-512.png" alt="Admin image" width="70" height="60"/>
+            </div>
+            <div class="col-9 text-center justify-content-center" style="font-size: 16px" *ngIf="isAdmin()">
+              <p class="text-white" style="float: right" ><strong>Administrator</strong></p>
+            </div>
+            <div class="col-9 text-center" style="font-size: 16px" *ngIf="isController()">
+                <p class="text-white" style="float: right"><strong>Controller</strong></p>
+              </div>
+          </div>
+          <ul class="navbar-nav flex-column mt-4" style="font-size: 14px;">
+            <li class="nav-item" *ngIf="isController()">
+              <a [routerLink]="['/userVerification']" routerLinkActive="router-link-active"
+                class="nav-link text-white p-0 pt-3 pb-3 pl-1 mb-2 sidebar-link">
+                <i class="fa fa-user text-light fa-lg mr-3"></i>
+                User Verification</a>
+            </li>
+            <li class="nav-item" *ngIf="isController()">
+              <a href="../../assets/103337-512.png" [routerLink]="['/ticketVerification']"
+                routerLinkActive="router-link-active" class="nav-link text-white p-0 pt-3 pb-3 pl-1 mb-2 sidebar-link">
+                <i class="fa fa-check-square text-light fa-lg mr-3"></i>
+                Ticket Verification</a>
+            </li>
+            <li class="nav-item" *ngIf="isAdmin()">
+              <a (click)="isCollapsedLines = !isCollapsedLines" [attr.aria-expanded]="!isCollapsedLines" aria-controls="collapseBasic"
+                class="nav-link text-white p-0 pt-3 pb-3 pl-1 mb-2 sidebar-link" style="cursor: pointer">
+                <i class="fa fa-list-ol text-light fa-lg mr-3"></i>
+                Lines</a>
+              <ul id="collapseBasic" [collapse]="isCollapsedLines" [isAnimated]="true" class="text-white">
+                <li><a [routerLink]="['/newLine']" routerLinkActive="router-link-active" class="nav-link text-white p-0 pt-3 pb-3 pl-1 mb-2 sidebar-link">New Line</a> </li>
+                <li><a [routerLink]="['/viewLines']" routerLinkActive="router-link-active" class="nav-link text-white p-0 pt-3 pb-3 pl-1 mb-2 sidebar-link">View Lines</a></li>
+              </ul>
+            </li>
+            <li class="nav-item" *ngIf="isAdmin()">
+              <a (click)="isCollapsedStations = !isCollapsedStations" [attr.aria-expanded]="!isCollapsedStations" aria-controls="collapseBasic"
+                class="nav-link text-white p-0 pt-3 pb-3 pl-1 mb-2 sidebar-link" style="cursor: pointer">
+                <i class="fa fa-map-marker text-light fa-lg mr-3"></i>
+                Stations</a>
+              <ul id="collapseBasic" [collapse]="isCollapsedStations" [isAnimated]="true" class="text-white">
+                <li><a [routerLink]="['/newStation']" routerLinkActive="router-link-active" class="nav-link text-white p-0 pt-3 pb-3 pl-1 mb-2 sidebar-link">New Station</a> </li>
+                <li><a [routerLink]="['/viewStations']" routerLinkActive="router-link-active" class="nav-link text-white p-0 pt-3 pb-3 pl-1 mb-2 sidebar-link">View Stations</a></li>
+              </ul>
+            </li>
+            <li class="nav-item" *ngIf="isAdmin()">
+              <a (click)="isCollapsedTimetables = !isCollapsedTimetables" [attr.aria-expanded]="!isCollapsedTimetables" aria-controls="collapseBasic"
+                class="nav-link text-white p-0 pt-3 pb-3 pl-1 mb-2 sidebar-link" style="cursor: pointer">
+                <i class="fa fa-bus text-light fa-lg mr-3"></i>
+                Timetables</a>
+              <ul id="collapseBasic" [collapse]="isCollapsedTimetables" [isAnimated]="true" class="text-white">
+                <li><a [routerLink]="['/newTimetable']" routerLinkActive="router-link-active" class="nav-link text-white p-0 pt-3 pb-3 pl-1 mb-2 sidebar-link">New Timetable</a> </li>
+                <li><a [routerLink]="['/viewTimetables']" routerLinkActive="router-link-active" class="nav-link text-white p-0 pt-3 pb-3 pl-1 mb-2 sidebar-link">View Timetables</a></li>
+              </ul>
+            </li>
+            <li class="nav-item" *ngIf="isAdmin()">
+              <a (click)="isCollapsedPricelist = !isCollapsedPricelist" [attr.aria-expanded]="!isCollapsedPricelist" style="cursor: pointer"
+              aria-controls="collapseBasic" class="nav-link text-white p-0 pt-3 pb-3 pl-1 mb-2 sidebar-link">
+                <i class="fa fa-list text-light fa-lg mr-3"></i>
+                Pricelist</a>
+                <ul id="collapseBasic" [collapse]="isCollapsedPricelist" [isAnimated]="true" class="text-white">
+                    <li><a [routerLink]="['/newPricelist']" routerLinkActive="router-link-active" class="nav-link text-white p-0 pt-3 pb-3 pl-1 mb-2 sidebar-link">New PriceList</a> </li>
+                    <li><a [routerLink]="['/viewPricelist']" routerLinkActive="router-link-active" class="nav-link text-white p-0 pt-3 pb-3 pl-1 mb-2 sidebar-link">View Pricelists</a></li>
+                    <li><a [routerLink]="['/pricelist']" routerLinkActive="router-link-active" class="nav-link text-white p-0 pt-3 pb-3 pl-1 mb-2 sidebar-link">Current Pricelist</a></li>
+                  </ul>
+            </li>
+          </ul>
+        </div>
+        <!-- END OF SIDEBAR -->
+
+        <div [ngClass]="{'row':isAdmin() || isController()}">
+          <div [ngClass]="{'col-xl-10 col-lg-9 col-md-8 ml-auto p-0':isAdmin() || isController()}">
+
+
+            <div class="row jumbotron-fluid m-0 moiClassOrangeDiv">
+              <!--jumbotron-->
+              <img src="../assets/s5.jpg" *ngIf="!loggedIn()" class="img-fluid moiClassHomeImg" alt="Responsive image">
+              <div class="col-md-12 text-center p-0" [ngStyle]="{'margin-top': !loggedIn() ? 5 : (loggedIn() ? 0 : null), 
+                            'margin-bottom': !loggedIn() ? 5 : (loggedIn() ? 0 : null) }"
+                [ngClass]="{'moiClassCapture': !loggedIn(), 'moiClassCaptureLogin': loggedIn()}">
+                <h1 style="color: white">Public Transport</h1>
+                <h4 style="color: white">Novi Sad</h4>
+                <div *ngIf="!loggedIn()" class="">
+                  <!--hidden-->
+                  <button (click)="openModalLogin()"
+                    class="btn btn-default moiClassButton">&nbsp;&nbsp;&nbsp;&nbsp;Login&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                  <button (click)="openModalRegister()" class="btn btn-default moiClassButton">Registration</button>
+                </div>
+                <div *ngIf="loggedIn()" class="">
+                  <button (click)="logout()" class="btn btn-default moiClassButton moiClassButtonLogout">Logout</button>
+                </div>
+              </div>
+            </div>
+            <div class="row moiClassWhiteDiv m-0 justify-content-center" *ngIf="!isAdmin() && !isController()">
+              <!-- <div class="row m-0 justify-content-center" [ngClass]="{'moiClassCaptureLogin': loggedIn()}"> -->
+              <div [routerLink]="['/timetable']" routerLinkActive="router-link-active"
+                class="text-center moiClassIconMenu">
+                <img class="moiClassButtonMenu" src="../assets/905668-512.png" alt="TimeTable">
+                <p style="color: orange">Timetable</p>
+              </div>
+              <div [routerLink]="['/map']" routerLinkActive="router-link-active" class="text-center moiClassIconMenu">
+                <img class="moiClassButtonMenu" src="../assets/1291745-512.png" alt="Map">
+                <p style="color: orange">Map</p>
+              </div>
+              <div [routerLink]="['/pricelist']" routerLinkActive="router-link-active"
+                class="text-center moiClassIconMenu">
+                <img class="moiClassButtonMenu" style="width: 80px" src="../assets/3002785-512.png" alt="Pricelist">
+                <p style="color: orange">Pricelist</p>
+              </div>
+              <div [routerLink]="['/tickets']" routerLinkActive="router-link-active"
+                class="text-center moiClassIconMenu">
+                <img class="moiClassButtonMenu" src="../assets/3545100-512.png" alt="Tickets">
+                <p style="color: orange">Buy a ticket</p>
+              </div>
+              <div (click)="openModalMyTicket()" *ngIf="loggedIn()"
+                class="text-center moiClassIconMenu">
+                <img class="moiClassButtonMenu" src="../assets/4544813-512.png" alt="Ticket">
+                <p style="color: orange">My ticket</p>
+              </div>
+              <div [routerLink]="['/updateAccount']" routerLinkActive="router-link-active" *ngIf="loggedIn()"
+                class="text-center moiClassIconMenu">
+                <img class="moiClassButtonMenu" src="../assets/2703063-512.png" alt="Account">
+                <p style="color: orange">My account</p>
+              </div>
+              <!-- </div> -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</nav>
+<!-- END OF NAVBAR -->

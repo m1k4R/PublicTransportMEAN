@@ -1,0 +1,11 @@
+.moiClassView {
+    background-color:  rgb(88, 88, 88);
+    height: auto;
+}
+
+.moiClassMapView {
+    background-color: rgba(52, 51, 56, 0.603);
+    padding: 2%;
+    height: 70vh;
+    width: 70vw;
+}

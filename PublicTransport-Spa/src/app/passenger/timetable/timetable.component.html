@@ -1,0 +1,116 @@
+<div class="row jumbotron-fluid moiClassView p-2 m-0" style="font-size: 14px">
+  <!--jumbotron-->
+  <div class="col">
+    <div class="moiClassComponentView">
+      <div class="row p-2">
+        <div class="col-3">
+          <label for="exampleFormControlSelect1" style="color: white">Select a day</label>
+        </div>
+        <div class="col-9">
+          <select (change)="dayChanged($event.target.value)" class="custom-select mr-sm-4" style="font-size: 14px">
+            <option selected>Working day</option>
+            <option>Saturday</option>
+            <option>Sunday</option>
+          </select>
+        </div>
+      </div>
+      <div class="row p-2">
+        <div class="col-3">
+          <label for="exampleFormControlSelect1" style="color: white">Select a type</label>
+        </div>
+        <div class="col-9">
+          <select (change)="typeChanged($event.target.value)" class="custom-select mr-sm-4" style="font-size: 14px">
+            <option selected>In City</option>
+            <option>Out of City</option>
+          </select>
+        </div>
+      </div>
+      <div class="row p-2">
+        <div class="col-3">
+          <label for="exampleFormControlSelect1" style="color: white">Line number</label>
+        </div>
+        <div class="col-9">
+          <select (change)="lineChanged($event.target.value)" class="custom-select mr-sm-4" size="4" style="font-size: 14px">
+              <option *ngFor="let line of allLines" value={{line?._id}}>{{line?.lineNumber}}. {{line?.name}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <hr class="moiClassHrMenu">
+    <div class="">
+      <div class="row p-2 justify-content-center">
+        <p style="font-size: 16px; color: white; font-weight: bold">{{line?.lineNumber}}. {{line?.name}}</p>
+      </div>
+      <div class="row p-2">
+        <div class="col">
+          <table class="table table-striped table-dark moiClassTimeTable" style="font-size: 16px">
+            <thead>
+            </thead>
+            <tbody>
+              <tr *ngFor="let departure of departures">
+                <th scope="row">{{departure?.name}}</th>
+                <td>{{departure?.description}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- <div class="col">
+          <table class="table table-striped table-dark">
+            <thead>
+              <tr>
+                <th colspan="2" scope="col">Smer A: NOVO NASELJE - CENTAR - LIMAN 4</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">05</th>
+                <td>02 15 34 57</td>
+              </tr>
+              <tr>
+                <th scope="row">06</th>
+                <td>10 17 22 30 44 58</td>
+              </tr>
+              <tr>
+                <th scope="row">07</th>
+                <td>05 11 17 21 31 40 57</td>
+              </tr>
+            </tbody>
+          </table>
+        </div> -->
+
+      </div>
+    </div>
+  </div>
+  <div class="col jumbotron m-0" style="background-color:  rgba(52, 51, 56, 0.603);">
+      <agm-map [latitude]="45.261705" [longitude]="19.837223" [zoom]="16">
+
+        <div style="z-index: 10000 !important; position: relative !important;">
+          <agm-marker [latitude]="busLocation?.x" [longitude]="busLocation?.y" title="Bus" style="z-index: 100000 !important; position: relative !important;" [iconUrl]="icon">
+          </agm-marker>
+        </div>
+
+          <div *ngFor="let station of allStations" style="z-index: -1 !important; position: relative !important;">
+            <agm-marker [latitude]="station.location.x" [longitude]="station.location.y" [title]="station.name"
+            [label]="station.name" style="z-index: 1 !important; position: relative !important;">
+
+              <agm-info-window [latitude]="station.location.x" [longitude]="station.location.y" >
+                <span style="font-size: 16px;font-family:'Times New Roman'">{{station.name}}</span>
+                <br/>
+                <span *ngFor="let st of station.stationLines" style="font-family:'Times New Roman'; color:gray;"><strong>{{st.line.lineNumber}},</strong></span>
+              </agm-info-window>
+
+            </agm-marker>
+          </div>
+            <!-- <agm-polyline [strokeColor]="polyline.color">
+                 <agm-polyline-point *ngFor="let point of polyline.path" [latitude]="point.latitude" [longitude]="point.longitude">
+                 </agm-polyline-point>
+            </agm-polyline> -->
+
+            <!-- <agm-marker *ngFor="let point of polyline.path" [latitude]="point.latitude" [longitude]="point.longitude" [iconUrl]="polyline.icon">
+            </agm-marker> -->
+
+              <agm-direction *ngFor="let dir of allDir" [waypoints]="dir.waypoints"  [origin]="dir.origin" [visible]="dir.show" [destination]="dir.destination" [renderOptions]="options"></agm-direction>
+
+        </agm-map>
+  </div>
+</div>

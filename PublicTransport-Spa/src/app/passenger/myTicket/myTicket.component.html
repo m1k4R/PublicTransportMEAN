@@ -1,0 +1,17 @@
+<div class="container" style="margin: 5%">
+  <div class="card card-container moiClassLoginBg">
+    <div *ngIf="!ticket" class="row justify-content-center" style="color: white; padding: 5%; margin: 2%">
+      <p id="profile-name" class="profile-name-card">Sorry, you haven't bought a ticket.</p>
+      <br><br>
+      <button class="btn btn-default border-dark moiClassTicketHover" style="color: white" (click)="buyTicket()">Buy
+        Ticket</button>
+    </div>
+    <div *ngIf="ticket" class="row justify-content-center" style="color: white; padding: 5%; margin: 2%">
+      <img src="../assets/4544813-512.png" alt="Ticket" style="height: 200px; width: 200px"><br>
+      <p id="profile-name" class="profile-name-card">ID: {{user?.tickets[0]?.id}}</p><br>
+      <button class="btn btn-default border-dark moiClassTicketHover" style="color: white"
+        (click)="close()">Close</button>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,74 @@
+.moiClassView {
+    background-color:  rgb(88, 88, 88);
+    height: auto;
+}
+
+.moiClassTimeTable {
+    padding: 0%;
+}
+
+table.moiClassTimeTable td, th {
+    padding: 1%;
+}
+
+.moiClassComponentView {
+    background-color: rgba(52, 51, 56, 0.603);
+    padding: 2%;
+}
+
+.moiClassButton {
+    background-color: rgba(255, 166, 0, 0.705);
+    color: white;
+    font-weight: bolder;
+    font-size: 16px;
+    border: none;
+    padding: 0%;
+    width: 100px;
+}
+
+.moiClassButton:hover {
+    background-color: orange;
+}
+
+.moiClassButtonApproved {
+    font-size: 20px;
+    color: white;
+    font-weight: bolder;
+    padding-left: 3%;
+    padding-right: 3%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    width: 150px;
+    background-color: orange;
+    margin-right: 2%;
+}
+
+.moiClassButtonApproved:hover {
+    background-color: rgb(212, 139, 3);
+}
+
+.moiClassButtonReject {
+    font-size: 20px;
+    padding-left: 3%;
+    color: white;
+    font-weight: bolder;
+    padding-right: 3%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    width: 150px;
+    background-color: rgb(163, 163, 163);
+    margin-left: 2%;
+}
+
+.moiClassButtonReject:hover {
+    background-color: rgb(119, 119, 119);;
+}
+
+.moiClassUserDocument {
+    height: 500px;
+    width: 500px;
+}
+
+table.moiClassUserRequest td, th {
+    padding: 2%;
+}

@@ -1,0 +1,47 @@
+<div class="row jumbotron-fluid moiClassView p-2 m-0" style="font-size: 14px">
+  <div class="col">
+          <table class="table table-dark moiClassTimeTable text-center" style="font-size: 16px">
+            <thead style="background-color: rgba(255,165,0,0.8);">
+              <tr style="border-bottom: solid white 2px;">
+                <th scope="col">&nbsp;</th>
+                <th scope="col">Hourly Ticket</th>
+                <th scope="col">Daily Ticket</th>
+                <th scope="col">Monthly Ticket</th>
+                <th scope="col">Annual Ticket</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Regular</th>
+                <td>{{allPrices.regularUserPricelist.priceH}} RSD</td>
+                <td>{{allPrices.regularUserPricelist.priceD}} RSD</td>
+                <td>{{allPrices.regularUserPricelist.priceM}} RSD</td>
+                <td>{{allPrices.regularUserPricelist.priceA}} RSD</td>
+              </tr>
+              <tr>
+                <th scope="row">Student</th>
+                <td>{{allPrices.studentPricelist.priceH}} RSD</td>
+                <td>{{allPrices.studentPricelist.priceD}} RSD</td>
+                <td>{{allPrices.studentPricelist.priceM}} RSD</td>
+                <td>{{allPrices.studentPricelist.priceA}} RSD</td>
+              </tr>
+              <tr>
+                <th scope="row">Senior</th>
+                <td>{{allPrices.seniorPricelist.priceH}} RSD</td>
+                <td>{{allPrices.seniorPricelist.priceD}} RSD</td>
+                <td>{{allPrices.seniorPricelist.priceM}} RSD</td>
+                <td>{{allPrices.seniorPricelist.priceA}} RSD</td>
+              </tr>
+              <tr>
+                <th colspan="6" class="text-left" style="font-size: 12px">
+                  *Hourly Ticket - Valid for 1h. <br><br>
+                  *Daily Ticket - Valid on the day when it was bought until midnight 00:00:00. <br><br>
+                  *Monthly Ticket - Valid for one month. <br><br>
+                  *Annual Ticket - Valid for one year. <br><br>
+                </th>
+              </tr>
+            </tbody>
+          </table>
+  </div>
+
+</div>

@@ -1,0 +1,117 @@
+<div class="row jumbotron-fluid moiClassView p-2 m-0" style="font-size: 14px">
+  <div class="col">
+    <form [formGroup]="stationForm" (ngSubmit)="createStation()">
+      <table class="table table-dark moiClassTimeTable" style="font-size: 16px">
+        <thead>
+          <tr>
+            <th scope="col" colspan="7" style="font-size: 20px">New Station</th>
+          </tr>
+          <tr>
+            <th colspan="7" scope="col">&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="form-group">
+            <th scope="row">Station Name: </th>
+            <td colspan="6"><input class="form-control" formControlName="name"
+                [ngClass]="{'is-invalid': stationForm.get('name').errors && stationForm.get('name').touched}">
+              <div class="invalid-feedback"
+                *ngIf="stationForm.get('name').touched && stationForm.get('name').hasError('required')">Station Name
+                is
+                required</div>
+            </td>
+          </tr>
+          <tr class="form-group">
+            <th scope="row">Address</th>
+            <th scope="row">City: </th>
+            <td><input class="form-control" formControlName="city"
+                [ngClass]="{'is-invalid': stationForm.get('city').errors && stationForm.get('city').touched}">
+              <div class="invalid-feedback"
+                *ngIf="stationForm.get('city').touched && stationForm.get('city').hasError('required')">City is
+                required
+              </div>
+            </td>
+            <th scope="row">Street: </th>
+            <td><input class="form-control" formControlName="street"
+                [ngClass]="{'is-invalid': stationForm.get('street').errors && stationForm.get('street').touched}">
+              <div class="invalid-feedback"
+                *ngIf="stationForm.get('street').touched && stationForm.get('street').hasError('required')">Street is
+                required</div>
+            </td>
+            <th scope="row">Number: </th>
+            <td><input class="form-control" formControlName="number"
+                [ngClass]="{'is-invalid': stationForm.get('number').errors && stationForm.get('number').touched}">
+              <div class="invalid-feedback"
+                *ngIf="stationForm.get('number').touched && stationForm.get('number').hasError('required')">Number is
+                required</div>
+            </td>
+          </tr>
+          <tr class="form-group">
+            <th scope="row">Location</th>
+            <th scope="row">X: </th>
+            <td><input class="form-control" type="number" formControlName="x"
+                [ngClass]="{'is-invalid': stationForm.get('x').errors && stationForm.get('x').touched}">
+              <div class="invalid-feedback"
+                *ngIf="stationForm.get('x').touched && stationForm.get('x').hasError('required')">X is required
+              </div>
+            </td>
+            <th scope="row">Y: </th>
+            <td><input class="form-control" type="number" formControlName="y"
+                [ngClass]="{'is-invalid': stationForm.get('y').errors && stationForm.get('y').touched}">
+              <div class="invalid-feedback"
+                *ngIf="stationForm.get('y').touched && stationForm.get('y').hasError('required')">Y is
+                required</div>
+            </td>
+            <td colspan="2" class="moiClassChooseLocation"><a (click)="isCollapsed = !isCollapsed"
+                [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">
+                Choose Location</a></td>
+          </tr>
+          <tr>
+            <td colspan="7">
+              <div id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true" class="text-white"
+                class="moiClassComponentView justify-content-center">
+                <agm-map [latitude]="latitude" [longitude]="longitude" style="height: 400px; width: 100%" [zoom]="18" (mapClick)="onChoseLocation($event)">
+                  <agm-marker
+                    [latitude]="latitude"
+                    [longitude]="longitude"
+                    *ngIf="locationChosen"></agm-marker>
+                </agm-map>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row" colspan="4">Lines: </th>
+            <th scope="row" colspan="3">Add Lines: </th>
+          </tr>
+          <tr style="vertical-align: top">
+            <td colspan="3" style="vertical-align: top">
+              <div class="form-group">
+                <select (change)="lineChanged($event.target.value)"
+                  class="form-control" size="6" id="exampleFormControlSelect2">
+                  <option *ngFor="let line of newStationLines" value={{line._id}}>{{line?.lineNumber}}. {{line?.name}}</option>
+                </select>
+                <button (click)="removeLine()" class="btn btn-default moiClassButtonRemove" type="button">Remove Line</button>
+              </div>
+            </td>
+            <td><i class="fa fa-arrow-left text-white" style="font-size: 2em"></i></td>
+            <td colspan="3" style="vertical-align: top">
+              <div class="form-group">
+                <select (change)="lineChangedAdd($event.target.value)"
+                  class="form-control" size="6" id="exampleFormControlSelect2">
+                  <option *ngFor="let line of allLines" value={{line._id}}>{{line.lineNumber}}. {{line.name}}</option>
+                </select>
+                <button (click)="addLine()" class="btn btn-default moiClassButtonRemove" type="button">Add Line</button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row" colspan="7">
+              <button *ngIf="!edit" class="btn btn-default moiClassButton" type="submit" >Add Station</button>
+              <button *ngIf="edit" class="btn btn-default moiClassButton" type="submit" >Update Station</button>
+            </th>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<div class="row jumbotron-fluid moiClassView p-2 m-0" style="font-size: 14px">
+  <div class="row mx-auto moiClassMapView">
+      <agm-map [latitude]="45.261705" [longitude]="19.837223" [zoom]="16">  
+
+        <div *ngFor="let station of allStations">
+          <agm-marker [latitude]="station.location.x" [longitude]="station.location.y" [title]="station.name"
+          [label]="station.name">
+      
+            <agm-info-window [latitude]="station.location.x" [longitude]="station.location.y" >
+              <span style="font-size: 16px;font-family:'Times New Roman'">{{station.name}}</span>
+              <br/>
+              <span *ngFor="let st of station.stationLines" style="font-family:'Times New Roman'; color:gray;"><strong>{{st.line.lineNumber}}</strong></span>
+            </agm-info-window>
+      
+          </agm-marker>
+        </div>
+          <!-- <agm-polyline [strokeColor]="polyline.color">
+               <agm-polyline-point *ngFor="let point of polyline.path" [latitude]="point.latitude" [longitude]="point.longitude">
+               </agm-polyline-point>
+          </agm-polyline> -->
+      
+          <!-- <agm-marker *ngFor="let point of polyline.path" [latitude]="point.latitude" [longitude]="point.longitude" [iconUrl]="polyline.icon">
+          </agm-marker> -->
+          <div *ngFor="let dir of allDir, let i = index">
+            <agm-direction [waypoints]="dir.waypoints"  [origin]="dir.origin" [destination]="dir.destination" [renderOptions]="dirsRenderOpt[i].renderOptions"></agm-direction>
+          </div>
+      </agm-map>
+  </div>
+</div>

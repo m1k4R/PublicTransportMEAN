@@ -1,0 +1,26 @@
+.moiClassTicketIcon {
+    color: orange;
+}
+
+.moiClassTicketBorder {
+    border-top: 10px dashed rgb(116, 114, 122);
+    border-bottom: 10px dashed rgb(116, 114, 122);
+    /* border: 10px ridge orange; */
+}
+
+.moiClassTicketHover {
+    font-weight: bold;
+}
+
+.moiClassTicketHover:hover {
+    background-color: orange;
+    color: white;
+    font-weight: bold;
+}
+
+.moiClassTicketHover:focus,
+.moiClassTicketHover:focus{
+    background-color: orange;
+    color: white;
+    font-weight: bold;
+}

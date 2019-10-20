@@ -1,0 +1,43 @@
+<div class="row jumbotron-fluid moiClassView p-2 m-0" style="font-size: 14px">
+  <div class="col">
+    <table class="table table-striped table-dark moiClassTimeTable" style="font-size: 16px">
+      <thead>
+        <tr>
+          <th scope="col" colspan="6" style="font-size: 20px">Timetables</th>
+        </tr>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Type</th>
+          <th scope="col">Line</th>
+          <th scope="col" class="moiClassShowLines">
+            <a (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
+              aria-controls="collapseBasic">
+              Show Departures</a>
+          </th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let timetable of allTimetables">
+        <tr >
+          <th scope="row">{{timetable?._id}}</th>
+          <td>{{timetable?.type}}</td>
+          <td style="font-size: 12px">{{timetable?.line?.lineNumber}}. {{timetable?.line?.name}}</td>
+          <td>{{timetable?.day}}</td>
+          <td><button [routerLink]="['/newTimetable',{timetableId: timetable._id}]" routerLinkActive="router-link-active"
+              class="btn btn-default moiClassButton">Edit</button></td>
+          <td><i class="fa fa-trash moiClassButtonTable" (click)="deleteTimetable(timetable?._id)"></i></td>
+        </tr>
+        <tr>
+          <td colspan="6">
+            <div id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true" class="text-white"
+              style="font-size: 14px; width: 100%; text-align: left">
+              <span style="color: rgb(255, 174, 0)">{{timetable.departures}}</span>
+            </div>
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

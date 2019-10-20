@@ -1,0 +1,226 @@
+<div class="row jumbotron-fluid moiClassView p-2 m-0" style="font-size: 14px">
+  <!-- <div class="container moiClassRegisterBg"> -->
+  <div class="col">
+    <div class="row jumbotron-fluid justify-content-center" style="color: orange">
+      <h2 class="text-center font-weight-bolder">Update Account</h2>
+    </div>
+    <div class="row jumbotron-fluid justify-content-center" style="color: orange">
+      <h6>Account Status: {{user.accountStatus}}</h6>
+    </div>
+    <div class="row moiClassRegisterBg">
+      <div class="col">
+        <form [formGroup]="updateForm" (ngSubmit)="updateAccount()">
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <input [ngClass]="{'is-invalid': updateForm.get('name').errors && updateForm.get('name').touched}"
+                  class="form-control" placeholder="Name" formControlName="name">
+                <div class="invalid-feedback"
+                  *ngIf="updateForm.get('name').touched && updateForm.get('name').hasError('required')">Name is required
+                </div>
+              </div>
+
+              <div class="form-group">
+                <input [ngClass]="{'is-invalid': updateForm.get('surname').errors && updateForm.get('surname').touched}"
+                  class="form-control" placeholder="Surname" formControlName="surname">
+                <div class="invalid-feedback"
+                  *ngIf="updateForm.get('surname').touched && updateForm.get('surname').hasError('required')">Surname is
+                  required</div>
+              </div>
+
+              <div class="form-group">
+                <input
+                  [ngClass]="{'is-invalid': updateForm.get('dateOfBirth').errors && updateForm.get('dateOfBirth').touched}"
+                  class="form-control" placeholder="Date of Birth" formControlName="dateOfBirth" type="text"
+                  bsDatepicker [bsConfig]="bsConfig">
+                <div class="invalid-feedback"
+                  *ngIf="updateForm.get('dateOfBirth').touched && updateForm.get('dateOfBirth').hasError('required')">
+                  Date
+                  of Birth is required</div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <input [ngClass]="{'is-invalid': updateForm.get('city').errors && updateForm.get('city').touched}"
+                  class="form-control" placeholder="City" formControlName="city">
+                <div class="invalid-feedback"
+                  *ngIf="updateForm.get('city').touched && updateForm.get('city').hasError('required')">City is required
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <input [ngClass]="{'is-invalid': updateForm.get('street').errors && updateForm.get('street').touched}"
+                  class="form-control" placeholder="Street" formControlName="street">
+                <div class="invalid-feedback"
+                  *ngIf="updateForm.get('street').touched && updateForm.get('street').hasError('required')">Street is
+                  required</div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <input [ngClass]="{'is-invalid': updateForm.get('number').errors && updateForm.get('number').touched}"
+                  class="form-control" placeholder="House Number" formControlName="number">
+                <div class="invalid-feedback"
+                  *ngIf="updateForm.get('number').touched && updateForm.get('number').hasError('required')">House Number
+                  is required</div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group" style="color: white">
+                <label class="radio-inline">
+                  <input class="mr-3" type="radio" value="regular" formControlName="userType">Regular User
+                </label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group" style="color: white">
+                <label class="radio-inline ml-3">
+                  <input class="mr-3" type="radio" value="student" formControlName="userType">Student
+                </label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group" style="color: white">
+                <label class="radio-inline ml-3">
+                  <input class="mr-3" type="radio" value="senior" formControlName="userType">Senior
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <input type="text"
+                  [ngClass]="{'is-invalid': updateForm.get('userName').errors && updateForm.get('userName').touched}"
+                  class="form-control" formControlName="userName" placeholder="Username">
+                <div class="invalid-feedback">Please choose a username</div>
+              </div>
+              <div class="form-group">
+                <input [ngClass]="{'is-invalid': updateForm.get('email').errors && updateForm.get('email').touched}"
+                  class="form-control" placeholder="Email" formControlName="email">
+                <div class="invalid-feedback"
+                  *ngIf="updateForm.get('email').touched && updateForm.get('email').hasError('required')">Email is
+                  required</div>
+              </div>
+              <div class="form-group">
+                <input type="password"
+                  [ngClass]="{'is-invalid': updateForm.get('oldPassword').errors && updateForm.get('oldPassword').touched}"
+                  class="form-control" formControlName="oldPassword" placeholder="Old Password">
+                <div class="invalid-feedback" *ngIf="updateForm.get('oldPassword').hasError('required') 
+                  && updateForm.get('oldPassword').touched">Password is required</div>
+                <div class="invalid-feedback" *ngIf="updateForm.get('oldPassword').hasError('minlength') 
+                  && updateForm.get('oldPassword').touched">Password must be at last 4 characters</div>
+                <div class="invalid-feedback" *ngIf="updateForm.get('oldPassword').hasError('maxlength') 
+                  && updateForm.get('oldPassword').touched">Password cannot exceed 8 characters</div>
+              </div>
+              <div class="form-group">
+                <input type="password"
+                  [ngClass]="{'is-invalid': updateForm.get('password').errors && updateForm.get('password').touched}"
+                  class="form-control" formControlName="password" placeholder="Password">
+                <div class="invalid-feedback" *ngIf="updateForm.get('password').hasError('required') 
+                                  && updateForm.get('password').touched">Password is required</div>
+                <div class="invalid-feedback" *ngIf="updateForm.get('password').hasError('minlength') 
+                                  && updateForm.get('password').touched">Password must be at last 4 characters</div>
+                <div class="invalid-feedback" *ngIf="updateForm.get('password').hasError('maxlength') 
+                                  && updateForm.get('password').touched">Password cannot exceed 8 characters</div>
+              </div>
+              <div class="form-group">
+                <input type="password" [ngClass]="{'is-invalid': updateForm.get('confirmPassword').errors && updateForm.get('confirmPassword').touched ||
+                                  updateForm.get('confirmPassword').touched && updateForm.hasError('mismatch')}"
+                  class="form-control" formControlName="confirmPassword" placeholder="Confirm Password">
+                <div class="invalid-feedback" *ngIf="updateForm.get('confirmPassword').hasError('required') 
+                                  && updateForm.get('confirmPassword').touched">Password is required</div>
+                <div class="invalid-feedback" *ngIf="updateForm.hasError('mismatch') 
+                                  && updateForm.get('confirmPassword').touched">Passwords must match</div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col">
+              <div class="form-group text-center">
+                <button class="btn btn-lg btn-primary btn-block btn-signin" [disabled]="!updateForm.valid"
+                  type="submit">Update</button>
+              </div>
+            </div>
+            <div class="col">
+              <button class="btn btn-lg btn-primary btn-block btn-signin" style="background-color: gray" type="button"
+                (click)="cancel()">Cancel</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col">
+        <table class="moiClassTimeTable" style="color: white">
+          <thead></thead>
+          <tbody>
+            <tr>
+              <td colspan="3"><img src="{{user.documentUrl}}" alt="" class="img-thumbnail" m-2
+                  style="width: 350% !important; height: 300px !important;"></td>
+            </tr>
+            <tr>
+              <th colspan="3">
+                Add Document
+              </th>
+            </tr>
+            <tr>
+              <td>
+                <input type="file" style="cursor: pointer" ng2FileSelect [uploader]="uploader" />
+              </td>
+              <td>
+                <section style="color: white; font-weight: bolder">OR</section>
+              </td>
+              <td>
+                <div ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)"
+                  [uploader]="uploader" class="card bg-faded text-center mb-3 my-drop-zone" style="color: black">
+                  <i class="fa fa-upload fa-3x" style="color: black"></i>
+                  Drop Photos Here
+                </div>
+              </td>
+            </tr>
+            <tr *ngFor="let item of uploader.queue">
+              <th>Name: {{ item?.file?.name }}</th>
+              <th>Size:</th>
+              <td>
+                <section *ngIf="uploader.options.isHTML5" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB
+                </section>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <div class="progress mb-4">
+                  <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button" class="btn btn-s" style="color: black; background-color: rgb(255, 230, 0); width: 100px; cursor: pointer" (click)="uploader.uploadAll()"
+                  [disabled]="!uploader.getNotUploadedItems().length">
+                  <span class="fa fa-upload"></span> Upload
+                </button>
+              </td>
+              <td>
+                <button type="button" class="btn btn-warning btn-s" style="color: black; background-color: rgb(255, 166, 0); width: 100px; cursor: pointer" (click)="uploader.cancelAll()"
+                  [disabled]="!uploader.isUploading">
+                  <span class="fa fa-ban"></span> Cancel
+                </button>
+              </td>
+              <td>
+                <button type="button" class="btn btn-danger btn-s" style="color: black; background-color: rgb(255, 94, 0); width: 150px; cursor: pointer" (click)="uploader.clearQueue()"
+                  [disabled]="!uploader.queue.length">
+                  <span class="fa fa-trash"></span> Remove
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

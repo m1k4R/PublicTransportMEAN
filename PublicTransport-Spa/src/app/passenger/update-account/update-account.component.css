@@ -1,0 +1,57 @@
+img.img-thumbnail {
+    height: 100px;
+    width: 100px !important;
+    margin-bottom: 2px;
+}
+
+.nv-file-over {
+    border: dotted 3px red;
+}
+
+input[type=file] {
+    color: transparent;
+}
+
+.moiClassView {
+    background-color:  rgb(88, 88, 88);
+    height: auto;
+}
+
+.moiClassRegisterBg {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding-top: 40px;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 0px;
+}
+
+.btn {
+    font-weight: 700;
+    height: 36px;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: default;
+}
+
+.btn.btn-signin {
+    background-color: rgb(216, 132, 22);
+    padding: 0px;
+    font-weight: 700;
+    font-size: 14px;
+    height: 36px;
+    border: none;
+}
+
+.btn.btn-signin:hover,
+.btn.btn-signin:active,
+.btn.btn-signin:focus {
+    background-color: orange;
+    cursor: pointer;
+}
+
+table.moiClassTimeTable td, th {
+    padding: 1%;
+    vertical-align: middle;
+    text-align: center;
+}

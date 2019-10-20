@@ -1,0 +1,42 @@
+.moiClassRegisterBg {
+    background-color: rgba(0, 0, 0, 0.5);
+    /* border: solid rgba(255, 166, 0, 0.774) 3px; */
+    padding-top: 40px;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 0px;
+}
+
+.btn {
+    font-weight: 700;
+    height: 36px;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: default;
+}
+
+.btn.btn-signin {
+    /*background-color: #4d90fe; */
+    background-color: rgb(216, 132, 22);;
+    /* background-color: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));*/
+    padding: 0px;
+    font-weight: 700;
+    font-size: 14px;
+    height: 36px;
+    /* -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px; */
+    border: none;
+    /* -o-transition: all 0.218s;
+    -moz-transition: all 0.218s;
+    -webkit-transition: all 0.218s;
+    transition: all 0.218s; */
+}
+
+.btn.btn-signin:hover,
+.btn.btn-signin:active,
+.btn.btn-signin:focus {
+    background-color: orange;
+    cursor: pointer;
+}

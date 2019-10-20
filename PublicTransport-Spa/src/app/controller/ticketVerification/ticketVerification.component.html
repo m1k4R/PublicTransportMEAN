@@ -1,0 +1,62 @@
+<div class="row jumbotron-fluid moiClassView p-0 m-0" style="font-size: 14px">
+    <div class="col-8 p-1">
+            <table class="table table-striped table-dark moiClassTimeTable" style="font-size: 16px">
+              <thead>
+                <tr>
+                  <th scope="col">Id</th>
+                  <th scope="col">Ticket Type</th>
+                  <th scope="col">Date of Issue</th>
+                  <th scope="col">Validation</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let ticket of tickets">
+                  <th scope="row">{{ticket._id}}</th>
+                  <td>{{ticket.ticketType}}</td>
+                  <td>{{ticket.dateOfIssue | date: 'dd/MM/yyyy'}}</td>
+                  <td><button class="btn btn-default moiClassButton" (click)="checkTicket(ticket._id)" >Check</button></td>
+                  <td [ngClass]="{'text-success': ticket.isValid, 'text-danger': !ticket.isValid}">
+                    <span *ngIf="ticket.isValid">Valid</span>
+                    <span *ngIf="!ticket.isValid">Expired</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+    </div>
+    <div class="col-4 p-1">
+        <table class="table table-dark moiClassUserRequest" style="font-size: 16px">
+            <thead>
+              <tr>
+                <th colspan="2" class="text-center" scope="col">Check Ticket Validation For Id</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Enter Id:</th>
+                <td><input type="text" [(ngModel)]="ticketId"></td>
+              </tr>
+              <tr>
+                  <th scope="row">Ticket Type:</th>
+                <td>{{validatedTicket?.ticketType}}</td>
+              </tr>
+              <tr>
+                  <th scope="row">Date of Issue:</th>
+                <td>{{validatedTicket?.dateOfIssue | date: 'dd/MM/yyyy'}}</td>
+              </tr>
+              <tr>
+                  <th scope="row">Status:</th>
+                <td [ngClass]="{'text-success': validatedTicket?.isValid, 'text-danger': !validatedTicket?.isValid}">
+                    <span *ngIf="validatedTicket?.isValid">Valid</span>
+                    <span *ngIf="!validatedTicket?.isValid">Expired</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" class="text-center">
+                  <button (click)="checkTicketForId()" class="btn btn-default moiClassButtonApproved">Check</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+  </div>

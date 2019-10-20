@@ -1,0 +1,8 @@
+<div class="container-fluid m-0 p-0">
+  <app-navbar></app-navbar>
+  <div [ngClass]="{ row: isAdmin() || isController()}">
+    <div [ngClass]="{ 'col-xl-10 col-lg-9 col-md-8 ml-auto p-0': isAdmin() || isController()}">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

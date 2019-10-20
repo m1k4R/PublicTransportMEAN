@@ -1,0 +1,58 @@
+<div class="row jumbotron-fluid moiClassView p-2 m-0" style="font-size: 14px">
+  <div class="col">
+    <form [formGroup]="timetableForm" (ngSubmit)="createTimetable()">
+      <table class="table table-dark moiClassTimeTable" style="font-size: 16px">
+        <thead>
+          <tr>
+            <th scope="col" colspan="4" style="font-size: 20px">New Timetable</th>
+          </tr>
+          <tr>
+            <th colspan="4" scope="col">&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="form-group">
+            <th scope="row">Type: </th>
+            <td><select (change)="typeChanged($event.target.value)" [value]="editTimetable?.type" class="custom-select mr-sm-4" style="font-size: 14px">
+                <option selected value="In City">In City</option>
+                <option value="Out of City">Out of City</option>
+              </select>
+            </td>
+            <th scope="row">Line: </th>
+            <td><select (change)="lineChanged($event.target.value)" [value]="editTimetable?.line?._id" class="custom-select mr-sm-4" size="4" style="font-size: 14px">
+                <option *ngFor="let line of allLines" value={{line?._id}}>{{line?.lineNumber}}. {{line?.name}}</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row" colspan="3">Departures for: </th>
+            <td style="float: left">
+                <select (change)="dayChanged($event.target.value)" [value]="editTimetable?.day" class="custom-select mr-sm-4" style="font-size: 14px; width: 200px;">
+                    <option selected value="Working day">Working day</option>
+                    <option value="Saturday">Saturday</option>
+                    <option value="Sunday">Sunday</option>
+                  </select>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="4">
+              <table cellpadding="10" style="width: 100%; font-size: 12px">
+                  <tr *ngFor="let i of ['00','01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23']" class="p-4">
+                      <th scope="row">{{i}}</th>
+                      <td>&nbsp;</td>
+                      <td *ngFor="let a of [00,01,02,03,04,05,06,07,08,09,10,11,12,13,14,15,16,17]"><input type="text" name="{{i}}-{{a}}" [value]="(departuresEdit[+i]?.departuresHour[+a] !== undefined)?departuresEdit[+i]?.departuresHour[+a] : ''" (change)="daparturesChanged($event.target.value, $event.target.name)" style="width: 30px;" maxlength="2"></td>
+                  </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row" colspan="7">
+              <button *ngIf="!edit" type="submit" class="btn btn-default moiClassButton">Add Timetable</button>
+              <button *ngIf="edit" type="submit" class="btn btn-default moiClassButton">Update Timetable</button>
+            </th>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+</div>

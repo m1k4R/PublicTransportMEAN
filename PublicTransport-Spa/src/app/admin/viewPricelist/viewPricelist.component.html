@@ -1,0 +1,37 @@
+<div class="row jumbotron-fluid moiClassView p-2 m-0" style="font-size: 14px">
+    <div class="col">
+      <table class="table table-striped table-dark moiClassTimeTable" style="font-size: 16px">
+        <thead>
+          <tr>
+            <th scope="col" colspan="7" style="font-size: 20px">Pricelists</th>
+          </tr>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">From</th>
+            <th scope="col">To</th>
+            <th scope="col">Active</th>
+            <th scope="col">Hourly Ticket</th>
+            <th scope="col">Daily Ticket</th>
+            <th scope="col">Monthly Ticket</th>
+            <th scope="col">Annual Ticket</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let pricelist of allPricelists">
+            <th scope="row">{{pricelist._id}}</th>
+            <td>{{pricelist.pricelist.from | date: 'dd/MM/yyyy'}}</td>
+            <td>{{pricelist.pricelist.to | date: 'dd/MM/yyyy'}}</td>
+            <td><input type="checkbox" [checked]="pricelist.pricelist.active" disabled class="form-check-input m-0" id="exampleCheck1"></td>
+            <td>{{pricelist.priceH}} RSD</td>
+            <td>{{pricelist.priceD}} RSD</td>
+            <td>{{pricelist.priceM}} RSD</td>
+            <td>{{pricelist.priceA}} RSD</td>
+            <td><button [routerLink]="['/newPricelist', {pricelistId: pricelist._id}]" routerLinkActive="router-link-active"
+                class="btn btn-default moiClassButton">Edit</button></td>
+            <td><i class="fa fa-trash moiClassButtonTable" (click)="removePricelist(pricelist._id)"></i></td>
+          </tr>
+      </table>
+    </div>
+  </div>

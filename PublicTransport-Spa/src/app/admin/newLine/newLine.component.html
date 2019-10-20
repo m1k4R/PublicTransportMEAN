@@ -1,0 +1,105 @@
+<div class="row jumbotron-fluid moiClassView p-2 m-0" style="font-size: 14px">
+  <div class="col">
+    <form [formGroup]="lineForm" (ngSubmit)="createLine()">
+      <table class="table table-dark moiClassTimeTable" style="font-size: 16px">
+        <thead>
+          <tr>
+            <th scope="col" colspan="4" style="font-size: 20px">New Line</th>
+          </tr>
+          <tr>
+            <th colspan="4" scope="col">&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="form-group">
+            <th scope="row">Line Number: </th>
+            <td><input class="form-control" formControlName="lineNumber" type="number"
+                [ngClass]="{'is-invalid': lineForm.get('lineNumber').errors && lineForm.get('lineNumber').touched}">
+              <div class="invalid-feedback"
+                *ngIf="lineForm.get('lineNumber').touched && lineForm.get('lineNumber').hasError('required')">Number is
+                required</div>
+            </td>
+            <th scope="row">Name: </th>
+            <td><input class="form-control" formControlName="name" type="text"
+                [ngClass]="{'is-invalid': lineForm.get('name').errors && lineForm.get('name').touched}">
+              <div class="invalid-feedback"
+                *ngIf="lineForm.get('name').touched && lineForm.get('name').hasError('required')">Name is
+                required</div>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row" colspan="2">Stations: </th>
+            <th scope="row" colspan="2">Add Stations: </th>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <div class="form-group">
+                <select (change)="stationChanged($event.target.value)" class="form-control" size="6" id="exampleFormControlSelect2">
+                  <option *ngFor="let station of newLineStations" value={{station._id}}>{{station.name}}</option>
+                </select>
+                <button (click)="removeStation()" type="button" class="btn btn-default moiClassButtonRemove">Remove</button>
+              </div>
+            </td>
+            <td><i class="fa fa-arrow-left text-white" style="font-size: 2em"></i></td>
+            <td colspan="2">
+              <div class="form-group">
+                <select (change)="stationChangedAdd($event.target.value)" class="form-control" size="6" id="exampleFormControlSelect2">
+                  <option *ngFor="let station of allStations" value={{station._id}}>{{station.name}}</option>
+                </select>
+                <button (click)="addStation()" type="button" class="btn btn-default moiClassButtonRemove">Add</button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+              <th scope="row" colspan="2">Buses: </th>
+              <th scope="row" colspan="2">Add Buses: </th>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <div class="form-group">
+                  <select (change)="busChanged($event.target.value)" class="form-control" size="6" id="exampleFormControlSelect2">
+                    <option *ngFor="let bus of newLineBuses" value={{bus._id}}>{{bus.busNumber}}</option>
+                  </select>
+                  <button (click)="removeBus()" type="button" class="btn btn-default moiClassButtonRemove">Remove</button>
+                </div>
+              </td>
+              <td><i class="fa fa-arrow-left text-white" style="font-size: 2em"></i></td>
+              <td colspan="2">
+                <div class="form-group">
+                  <select (change)="busChangedAdd($event.target.value)" class="form-control" size="6" id="exampleFormControlSelect2">
+                    <option *ngFor="let bus of allBuses" value={{bus._id}}>{{bus.busNumber}}</option>
+                  </select>
+                  <button (click)="addBus()" type="button" class="btn btn-default moiClassButtonRemove">Add</button>
+                </div>
+              </td>
+            </tr>
+          <tr>
+            <th scope="row" colspan="7">
+              <button *ngIf="!edit" class="btn btn-default moiClassButton" type="submit">Add Line</button>
+              <button *ngIf="edit" class="btn btn-default moiClassButton" type="submit">Update Line</button>
+            </th>
+          </tr>
+          <tr>
+            <td colspan="7">&nbsp;</td>
+          </tr>
+          <tr>
+            <td colspan="7" class="text-center">
+              <h4 class="my-4">Add new bus:</h4>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="7">&nbsp;</td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+</div>
+<div class="row moiClassView p-2 m-0 justify-content-center text-center bg-dark" style="font-size: 14px">
+
+  <form #busForm="ngForm" (ngSubmit)="addNewBus()" class="form-signin">
+    <input type="number" name="busNum" id="inputBusNumber" class="form-control" placeholder="Bus number" required autofocus [(ngModel)]="model.busNumber">
+    <br>
+    <button [disabled]="!busForm.valid" class="btn btn-default moiClassButton" type="submit">Add bus</button>
+</form>
+</div>
