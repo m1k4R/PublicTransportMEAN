@@ -19,44 +19,38 @@ export class MyTicketComponent implements OnInit {
   ticket: boolean;
   tickets: Ticket[] = new Array();
 
-  constructor(public modalRef: BsModalRef, private route: ActivatedRoute, private userService: UserService, 
+  constructor(public modalRef: BsModalRef, private route: ActivatedRoute, private userService: UserService,
               private router: Router, private authService: AuthService, private res: UpdateUserResolver) { }
 
   ngOnInit() {
-    this.userService.getUser(this.authService.decodedToken.nameid).subscribe(next => {
+    this.userService.getUser(this.authService.decodedToken.userId).subscribe(next => {
       this.user = next;
-      if (this.user.tickets === undefined || this.user.tickets.length < 1)
-    {
-      console.log("No ticket")
-      this.ticket = false;
-    }
-    else
-    {
-      console.log("Yes ticket")
-      this.ticket = true;
-    }
+      if (this.user.tickets === undefined || this.user.tickets.length < 1) {
+        console.log('No ticket');
+        this.ticket = false;
+      } else {
+        console.log('Yes ticket');
+        this.ticket = true;
+      }
       console.log(next);
     }, error => {
-      console.log("error");
-    })
-    
+      console.log('error');
+    });
   }
 
   buyTicket() {
     this.router.navigate(['/tickets']);
     this.modalRef.hide();
-    
-  }
+ }
 
   close() {
     this.modalRef.hide();
   }
 
   resolve(): User {
-    console.log('OPAAAAA' + this.authService.decodedToken.nameid);
+    console.log('OPAAAAA' + this.authService.decodedToken.userId);
     let user: User;
-    
     return user;
-}
+  }
 
 }

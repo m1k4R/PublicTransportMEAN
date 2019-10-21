@@ -35,7 +35,8 @@ export class TicketVerificationComponent implements OnInit {
   }
 
   checkTicketForId() {
-    this.controllerService.verificateTicket(this.ticketId).subscribe(next => {
+    const ticketForValidation = this.ticketId;
+    this.controllerService.verificateTicket(ticketForValidation).subscribe(next => {
       this.validatedTicket = next as Ticket;
       const indx = this.tickets.indexOf(this.tickets.find(ticket => ticket._id === this.validatedTicket._id));
       this.tickets[indx].isValid = this.validatedTicket.isValid;

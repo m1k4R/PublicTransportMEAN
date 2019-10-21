@@ -61,13 +61,19 @@ export class TicketsComponent implements OnInit {
         //console.log(this.paypalInfo);
 
         if (this.loggedIn()) {
-          this.userService.buyTicketUser(this.ticketType, this.authService.decodedToken.nameid).subscribe(next => {
+          this.userService.buyTicketUser(this.ticketType, this.authService.decodedToken.userId).subscribe(next => {
+            console.log(next);
+            if (next == null || next == undefined ) {
+              this.alertify.error('User is not verified');
+            }
+            else {
             this.alertify.success('Ticket bought');
-            this.userService.savePaypalInfo(this.paypalInfo).subscribe(() => {
+            this.userService.savePaypalInfo(this.paypalInfo, next._id).subscribe(() => {
               console.log('Ticket bought');
             }, () => {
               console.log('Ticket error');
             });
+          }
           }, error => {
             this.alertify.error('Error while buying ticket');
           });
@@ -75,7 +81,7 @@ export class TicketsComponent implements OnInit {
           if (this.email !== null && this.re.test(this.email)) {
             this.userService.buyTicketAnonimus(this.ticketType, this.email).subscribe(next => {
               this.alertify.success('Ticket bought');
-              this.userService.savePaypalInfo(this.paypalInfo).subscribe(() => {
+              this.userService.savePaypalInfo(this.paypalInfo, next._id).subscribe(() => {
                 console.log('Ticket bought');
               }, () => {
                 console.log('Ticket error');
@@ -101,6 +107,12 @@ export class TicketsComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.pricelists = data.pricelists;
+      console.log(data.pricelists);
+      console.log(this.pricelists);
+      console.log(this.pricelists[0].priceH);
+      console.log(this.pricelists[0].priceD);
+      console.log(this.pricelists[0].priceM);
+      console.log(this.pricelists[0].priceA);
     });
 
     /* this.initConfig(); */

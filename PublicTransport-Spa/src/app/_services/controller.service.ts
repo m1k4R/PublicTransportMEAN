@@ -14,19 +14,20 @@ export class ControllerService {
 
   verificateUser(userId: string, valid: boolean) {
     let params = new HttpParams();
-    params = params.append('userId', JSON.stringify(userId));
+    // params = params.append('userId', JSON.stringify(userId));
     params = params.append('valid', JSON.stringify(valid));
-    return this.http.put(this.baseUrl + 'moderator', params);
+    return this.http.put(this.baseUrl + 'moderator/verificateUser/' + userId, params);
   }
 
   verificateTicket(ticketId: string) {
     let params = new HttpParams();
-    params = params.append('ticketId', JSON.stringify(ticketId));
-    return this.http.put(this.baseUrl + 'moderator/validateTicket', params);
+    let id = ticketId;
+    params = params.append('id', JSON.stringify(id));
+    return this.http.put(this.baseUrl + 'moderator/validateTicket/' + ticketId, params);
   }
 
   getTickets() {
-    return this.http.get<Observable<Ticket[]>>(this.baseUrl + 'moderator');
+    return this.http.get<Observable<Ticket[]>>(this.baseUrl + 'moderator/getTickets');
   }
 
 }

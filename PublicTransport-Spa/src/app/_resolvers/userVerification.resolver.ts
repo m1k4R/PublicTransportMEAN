@@ -5,6 +5,7 @@ import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { UserService } from '../_services/user.service';
 import { User } from '../_models/user';
+import { UserRegister } from '../_models/userRegister';
 
 @Injectable()
 export class UserVerificationResolver implements Resolve<any> {
@@ -14,7 +15,7 @@ export class UserVerificationResolver implements Resolve<any> {
 
     constructor(private router: Router, private alertify: AlertifyService, private userService: UserService) {}
 
-    resolve(route: ActivatedRouteSnapshot): Observable<User[]> {
+    resolve(route: ActivatedRouteSnapshot): Observable<UserRegister[]> {
         return this.userService.getUsers().pipe(
             catchError(error => {
                 this.alertify.error('Problem retrieving data');

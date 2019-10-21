@@ -66,6 +66,7 @@ app.use('/api/employees', require('./routes/employee.routes'));
 app.use('/api/admin', require('./routes/admin.routes'));
 app.use('/api/user', require('./routes/user.routes'));
 app.use('/api/authorization', require('./routes/authorization.routes'));
+app.use('/api/moderator', require('./routes/moderator.routes'));
 
 /* app.use((req, res, next) => {
   console.log('First middleware');

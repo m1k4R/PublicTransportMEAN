@@ -20,42 +20,20 @@ const PricelistItemModel = PricelistItem.model;
 adminController.createLine = async (req, res) => {
   const newLine = new LineModel(req.body);
   const createdLine = await newLine.save();
-  /* if (req.body.buses != null && req.body.buses != undefined)
-  {
-      req.body.buses.forEach(bus => {
-      bus.inUse = true;
-      BusModel.findByIdAndUpdate(bus._id, {$set: bus});
-    });
-  } */
 
-  /* const line = {
-    id: createdLine._id,
-    lineNumber: createdLine.lineNumber,
-    name: createdLine.name,
-    stations: createdLine.stations,
-    buses: createdLine.buses,
-    timetableId: createdLine.timetableId
-  };
-
-  await LineModel.findByIdAndUpdate(createdLine._id, {$set: line}, {new: true});
- */
   res.json({
     'status': 'Line Saved'
   });
-  //res.json(createdLine);
 };
 
 adminController.getLine = async (req, res) => {
-  //console.log('BAD');
   const line = await LineModel.findById(req.params.lineId).populate('stations');
   res.json(line);
 };
 
 adminController.getLines = async (req, res) => {
-  //console.log('All Lines OK');
   const lines = await LineModel.find().populate('stations');
   res.json(lines);
-
 };
 
 adminController.removeLine = async (req, res) => {
@@ -82,27 +60,7 @@ adminController.editLine = async (req, res) => {
     timetableId: req.body.timetableId
   };
 
-  /* if (line.buses != null && line.buses != undefined)
-  {
-      line.buses.forEach(bus => {
-      bus.inUse = true;
-      BusModel.findByIdAndUpdate(bus._id, {$set: bus});
-    });
-  } */
-  /* line.buses.forEach(bus => {
-    bus.inUse = true;
-  }); */
-
   await LineModel.findByIdAndUpdate(lineId, {$set: line}, {new: true});
-  /* if (req.body.buses != null && req.body.buses != undefined)
-  {
-    req.body.buses.forEach(bus => {
-      //bus.inUse = true;
-      console.log(bus._id + '  ' + bus);
-      //const upd = BusModel.findByIdAndUpdate(bus._id, {$set: bus});
-      console.log(bus.inUse);
-    });
-  } */
 
   res.json({
     status: 'Line Updated'
@@ -122,9 +80,6 @@ adminController.createBus = async (req, res) => {
 
 adminController.getBusses = async (req, res) => {
   const busses = await BusModel.find({inUse: {$ne: true}});
-  /* busses.forEach(element => {
-    console.log(element.inUse);
-  }); */
   res.json(busses);
 };
 
@@ -144,51 +99,11 @@ adminController.busInUse = async (req, res) => {
   });
 };
 
-/* adminController.busNotInUse = async (req, res) => {
-  console.log('Bus not in use');
-  const { busId } = req.params;
-  const bus = {
-    location: req.body.location,
-    busNumber: req.body.busNumber,
-    inUse: req.body.inUse,
-    lineId: req.body.lineId
-  };
-
-  await BusModel.findByIdAndUpdate(busId, {$set: bus});
-
-  res.json({
-    status: 'Bus not in use'
-  });
-}; */
-
 // Station
 
 adminController.createStation = async (req, res) => {
-  //console.log(req.body);
   const newStation = new StationModel(req.body);
   const createdStation = await newStation.save();
-  //console.log(createdStation);
-  /* const station = {
-    address: {
-      city: req.body.city,
-      street: req.body.street,
-      number: req.body.number
-    },
-    location: {
-      x: req.body.x,
-      y: req.body.y
-    }
-  };
-
-  await StationModel.findByIdAndUpdate(createdStation._id, {$set: station}, {new: true}); */
-
-
-  /* newStation.address.city = req.body.city;
-  newStation.address.street = req.body.street;
-  newStation.address.number = req.body.number;
-  newStation.location.x = req.body.x;
-  newStation.location.y = req.body.y; */
-
 
   res.json({
     'status': 'Station Saved'
@@ -202,7 +117,6 @@ adminController.getStation = async (req, res) => {
 
 adminController.getStations = async (req, res) => {
   const stations = await StationModel.find().populate('lines');
-  //console.log(stations);
   res.json(stations);
 
 };
@@ -234,7 +148,6 @@ adminController.createPricelist = async (req, res) => {
   const pricelist = new PricelistItemModel(req.body);
 
   if (req.body.pricelist.active) {
-    //console.log('ostale na false');
     const pricelists = await PricelistItemModel.find();
 
     pricelists.forEach(element => {
@@ -245,78 +158,17 @@ adminController.createPricelist = async (req, res) => {
 
   const createdPricelist = await pricelist.save();
 
-
-
-  /* console.log(req.body);
-
-  console.log('Kreiramoo Pricelist');
-  const pricelist = new PricelistModel(req.body);
-  const createdPricelist = await pricelist.save();
-  console.log(createdPricelist);
-
-  //Create Items for 4 types of ticket
-  const hourItem = new ItemModel({ type: 'Hourly' });
-  const createdHourItem = await hourItem.save();
-  const dayItem = new ItemModel({ type: 'Daily' });
-  const createdDayItem = await dayItem.save();
-  const monthItem = new ItemModel({ type: 'Monthly' });
-  const createdMonthItem = await monthItem.save();
-  const annualItem = new ItemModel({ type: 'Annual' });
-  const createdAnnualItem = await annualItem.save();
-
-  //Create PricelistItems
-  const priceHourly = new PricelistItemModel({
-    pricelist: createdPricelist,
-    item: createdHourItem,
-    price: req.body.priceHourly
-  });
-  const createdPriceHourly = await priceHourly.save();
-  const priceDaily = new PricelistItemModel({
-    pricelist: createdPricelist,
-    item: createdDayItem,
-    price: req.body.priceDaily
-  });
-  const createdPriceDaily = await priceDaily.save();
-  const priceMonthly = new PricelistItemModel({
-    pricelist: createdPricelist,
-    item: createdMonthItem,
-    price: req.body.priceMonthly
-  });
-  const createdPriceMonthly = await priceMonthly.save();
-  const priceAnnual = new PricelistItemModel({
-    pricelist: createdPricelist,
-    item: createdAnnualItem,
-    price: req.body.priceAnnual
-  });
-  const createdPriceAnnual = await priceAnnual.save();
-  console.log('Kraj');
-  console.log(createdPriceAnnual); */
-
-  /* const line = {
-    id: createdLine._id,
-    lineNumber: createdLine.lineNumber,
-    name: createdLine.name,
-    stations: createdLine.stations,
-    buses: createdLine.buses,
-    timetableId: createdLine.timetableId
-  };
-
-  await LineModel.findByIdAndUpdate(createdLine._id, {$set: line}, {new: true});
- */
   res.json({
     'status': 'Pricelist Saved'
   });
-  //res.json(createdLine);
 };
 
 adminController.getPricelist = async (req, res) => {
-  //console.log('BAD');
   const pricelist = await PricelistItemModel.findById(req.params.pricelistId);
   res.json(pricelist);
 };
 
 adminController.getPricelists = async (req, res) => {
-  //console.log('All Lines OK');
   const pricelists = await PricelistItemModel.find();
   res.json(pricelists);
 
@@ -364,14 +216,12 @@ adminController.pricelistActiveFalse = async (req) => {
     priceM: req.priceM,
     priceA: req.priceA
   };
-  //console.log(pricelist);
   await PricelistItemModel.findByIdAndUpdate(pricelistId, {$set: pricelist}, {new: true});
 };
 
 // UserDiscount
 
 adminController.getUserDiscount = async (req, res) => {
-  //console.log('BAD');
   const userDiscount = await UserDiscount.find({ type: req.params.discType });
   res.json(userDiscount);
 };

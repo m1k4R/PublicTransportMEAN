@@ -73,21 +73,21 @@
             <div class="col">
               <div class="form-group" style="color: white">
                 <label class="radio-inline">
-                  <input class="mr-3" type="radio" value="regular" formControlName="userType">Regular User
+                  <input class="mr-3" type="radio" value="Regular" formControlName="userType">Regular User
                 </label>
               </div>
             </div>
             <div class="col">
               <div class="form-group" style="color: white">
                 <label class="radio-inline ml-3">
-                  <input class="mr-3" type="radio" value="student" formControlName="userType">Student
+                  <input class="mr-3" type="radio" value="Student" formControlName="userType">Student
                 </label>
               </div>
             </div>
             <div class="col">
               <div class="form-group" style="color: white">
                 <label class="radio-inline ml-3">
-                  <input class="mr-3" type="radio" value="senior" formControlName="userType">Senior
+                  <input class="mr-3" type="radio" value="Senior" formControlName="userType">Senior
                 </label>
               </div>
             </div>
@@ -111,31 +111,31 @@
                 <input type="password"
                   [ngClass]="{'is-invalid': updateForm.get('oldPassword').errors && updateForm.get('oldPassword').touched}"
                   class="form-control" formControlName="oldPassword" placeholder="Old Password">
-                <div class="invalid-feedback" *ngIf="updateForm.get('oldPassword').hasError('required') 
+                <div class="invalid-feedback" *ngIf="updateForm.get('oldPassword').hasError('required')
                   && updateForm.get('oldPassword').touched">Password is required</div>
-                <div class="invalid-feedback" *ngIf="updateForm.get('oldPassword').hasError('minlength') 
+                <div class="invalid-feedback" *ngIf="updateForm.get('oldPassword').hasError('minlength')
                   && updateForm.get('oldPassword').touched">Password must be at last 4 characters</div>
-                <div class="invalid-feedback" *ngIf="updateForm.get('oldPassword').hasError('maxlength') 
+                <div class="invalid-feedback" *ngIf="updateForm.get('oldPassword').hasError('maxlength')
                   && updateForm.get('oldPassword').touched">Password cannot exceed 8 characters</div>
               </div>
               <div class="form-group">
                 <input type="password"
                   [ngClass]="{'is-invalid': updateForm.get('password').errors && updateForm.get('password').touched}"
                   class="form-control" formControlName="password" placeholder="Password">
-                <div class="invalid-feedback" *ngIf="updateForm.get('password').hasError('required') 
+                <div class="invalid-feedback" *ngIf="updateForm.get('password').hasError('required')
                                   && updateForm.get('password').touched">Password is required</div>
-                <div class="invalid-feedback" *ngIf="updateForm.get('password').hasError('minlength') 
+                <div class="invalid-feedback" *ngIf="updateForm.get('password').hasError('minlength')
                                   && updateForm.get('password').touched">Password must be at last 4 characters</div>
-                <div class="invalid-feedback" *ngIf="updateForm.get('password').hasError('maxlength') 
+                <div class="invalid-feedback" *ngIf="updateForm.get('password').hasError('maxlength')
                                   && updateForm.get('password').touched">Password cannot exceed 8 characters</div>
               </div>
               <div class="form-group">
                 <input type="password" [ngClass]="{'is-invalid': updateForm.get('confirmPassword').errors && updateForm.get('confirmPassword').touched ||
                                   updateForm.get('confirmPassword').touched && updateForm.hasError('mismatch')}"
                   class="form-control" formControlName="confirmPassword" placeholder="Confirm Password">
-                <div class="invalid-feedback" *ngIf="updateForm.get('confirmPassword').hasError('required') 
+                <div class="invalid-feedback" *ngIf="updateForm.get('confirmPassword').hasError('required')
                                   && updateForm.get('confirmPassword').touched">Password is required</div>
-                <div class="invalid-feedback" *ngIf="updateForm.hasError('mismatch') 
+                <div class="invalid-feedback" *ngIf="updateForm.hasError('mismatch')
                                   && updateForm.get('confirmPassword').touched">Passwords must match</div>
               </div>
             </div>

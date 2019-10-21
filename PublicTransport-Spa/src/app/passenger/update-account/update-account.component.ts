@@ -18,7 +18,7 @@ import * as moment from 'moment';
 })
 export class UpdateAccountComponent implements OnInit {
   @Output() cancelRegister = new EventEmitter();
-  user: User;
+  user: UserRegister;
   userUpdate: UserRegister;
   updateForm: FormGroup;
   bsConfig: Partial<BsDatepickerConfig>;
@@ -49,7 +49,7 @@ export class UpdateAccountComponent implements OnInit {
 
   initializeUploader() {
     this.uploader = new FileUploader({
-      url: this.baseUrl + 'user/adddocument/' + this.authService.decodedToken.nameid,
+      url: this.baseUrl + 'user/adddocument/' + this.authService.decodedToken.userId,
       authToken: 'Bearer ' + localStorage.getItem('token'),
       isHTML5: true,
       allowedFileType: ['image'],
@@ -64,7 +64,7 @@ export class UpdateAccountComponent implements OnInit {
       if (response) {
         const res: any = JSON.parse(response);
         this.user.documentUrl = res.url;
-        this.user.publicId = res.id;
+        //this.user.publicId = res.id;
         this.alertify.success('Added document image successfuly');
       } else {
         this.alertify.error('Added document image unsuccessful');
@@ -85,9 +85,9 @@ export class UpdateAccountComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(8)]],
       oldPassword: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(8)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(8)]],
-      street: [this.user.address.street, Validators.required],
-      number: [this.user.address.number, Validators.required],
-      city: [this.user.address.city, Validators.required],
+      street: [this.user.street, Validators.required],
+      number: [this.user.number, Validators.required],
+      city: [this.user.city, Validators.required],
     }, {validator: this.passwordMatchValidator});
   }
 
@@ -115,7 +115,7 @@ export class UpdateAccountComponent implements OnInit {
   updateAccount() {
     if (this.updateForm.valid) {
       this.userUpdate = Object.assign({}, this.updateForm.value);
-      this.userService.updateAccount(this.userUpdate, this.authService.decodedToken.nameid).subscribe(() => {
+      this.userService.updateAccount(this.userUpdate, this.authService.decodedToken.userId).subscribe(() => {
         this.alertify.success('Account successfully updated');
       }, error => {
         this.alertify.error(error);

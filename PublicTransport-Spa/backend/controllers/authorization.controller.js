@@ -22,7 +22,7 @@ authorizationController.register = (req, res) => {
         documentUrl: req.body.documentUrl,
         accountStatus: req.body.accountStatus,
         publicId: req.body.publicId,
-        verified: req.body.verified,
+        verified: false,
         tickets: req.body.tickets,
         userRole: 'Passenger'
       });
@@ -49,8 +49,8 @@ authorizationController.login = async (req, res) => {
         message: 'Login Failed'
       });
     }
-    console.log(user.password);     // undefined
-    console.log(user[0].password);  // good
+    //console.log(user.password);     // undefined
+    //console.log(user[0].password);  // good
     loginUser = user;
     return bcrypt.compare(req.body.password, user[0].password);
   })
@@ -61,12 +61,12 @@ authorizationController.login = async (req, res) => {
       });
     }
     // create web token
-    console.log(loginUser.email);     // undefined
-    console.log(loginUser[0].email);  // good
+    //console.log(loginUser.email);     // undefined
+    //console.log(loginUser[0].email);  // good
     const token = jwt.sign(
       { email: loginUser[0].email, userId: loginUser[0]._id, userRole: loginUser[0].userRole },
       'secret_pass_moi',
-      { expiresIn: '1h' }
+      { expiresIn: '6h' }
     );
     res.status(200).json({
       token: token,

@@ -1,4 +1,5 @@
 export interface UserRegister {
+    _id?: string;
     userName: string;
     userType: string;
     email: string;
@@ -11,4 +12,5 @@ export interface UserRegister {
     dateOfBirth: Date;
     documentUrl?: string;
     accountStatus?: string;
+    verified?: boolean;
 }

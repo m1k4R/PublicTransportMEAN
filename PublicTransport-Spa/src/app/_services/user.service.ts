@@ -10,6 +10,7 @@ import { User } from '../_models/user';
 import { AllPricelists } from '../_models/allPricelists';
 import { Paypal } from '../_models/paypal';
 import { AuthService } from './auth.service';
+import { Ticket } from '../_models/ticket';
 
 @Injectable({
   providedIn: 'root'
@@ -19,14 +20,17 @@ export class UserService {
 
 constructor(private http: HttpClient, private authService: AuthService) { }
 
-getTicketPrices(active: boolean = true): Observable<PricelistItem> {
-  let params = new HttpParams();
+getTicketPrices(): Observable<PricelistItem> {  // active: boolean = true
+  // let params = new HttpParams();
+  let userId = 'none';
   if (this.authService.loggedIn()) {
-    params = params.append('userId', this.authService.decodedToken.nameid);
+    // params = params.append('userId', this.authService.decodedToken.userId);
+    console.log('ima userId');
+    userId = this.authService.decodedToken.userId;
   }
-  params = params.append('active', JSON.stringify(active));
-  //return this.http.get<PricelistItem[]>(this.baseUrl + 'publictransport/pricelists', {params});
-  return this.http.get<PricelistItem>(this.baseUrl + 'user/ticketsPrices', {params});
+  // params = params.append('active', JSON.stringify(active));
+  // return this.http.get<PricelistItem[]>(this.baseUrl + 'publictransport/pricelists', {params});
+  return this.http.get<PricelistItem>(this.baseUrl + 'user/ticketsPrices/' + userId);
 }
 
 getAllPricelists(active: boolean = true): Observable<AllPricelists> {
@@ -37,34 +41,34 @@ getAllPricelists(active: boolean = true): Observable<AllPricelists> {
   return this.http.get<AllPricelists>(this.baseUrl + 'user/pricelists');
 }
 
-getUser(id): Observable<User> {
-  return this.http.get<User>(this.baseUrl + 'user/' + id);
+getUser(userId): Observable<UserRegister> {
+  return this.http.get<UserRegister>(this.baseUrl + 'user/getUser/' + userId);
 }
 
-getUsers(): Observable<User[]> {
-  return this.http.get<User[]>(this.baseUrl + 'user/');
+getUsers(): Observable<UserRegister[]> {
+  return this.http.get<UserRegister[]>(this.baseUrl + 'user/getUsers');
 }
 
-updateAccount(user: UserRegister, id: string) {
-  return this.http.put(this.baseUrl + 'user/' + id, user);
+updateAccount(user: UserRegister, userId: string) {
+  return this.http.put(this.baseUrl + 'user/editUser/' + userId, user);
 }
 
-buyTicketAnonimus(ticketType, email) {
+buyTicketAnonimus(ticketType, email): Observable<Ticket> {
   let params = new HttpParams();
-  params = params.append('type', ticketType);
+  params = params.append('ticketType', ticketType);
   params = params.append('email', email);
-  return this.http.put(this.baseUrl + 'user/buyTicketUnRegistered', params);
+  return this.http.put<Ticket>(this.baseUrl + 'user/buyTicketUnRegistered', params);
 }
 
-buyTicketUser(ticketType, userId) {
+buyTicketUser(ticketType, userId): Observable<Ticket> {
   let params = new HttpParams();
-  params = params.append('type', ticketType);
+  params = params.append('ticketType', ticketType);
   params = params.append('userId', userId);
-  return this.http.put(this.baseUrl + 'user/buyTicket', params);
+  return this.http.put<Ticket>(this.baseUrl + 'user/buyTicket', params);
 }
 
-savePaypalInfo(paypal: Paypal) {
+savePaypalInfo(paypal: Paypal, ticketId: string) {
   console.log('Save paypal info');
-  return this.http.post(this.baseUrl + 'user/addPaypal', paypal);
+  return this.http.post(this.baseUrl + 'user/addPaypal/' + ticketId, paypal);
 }
 }

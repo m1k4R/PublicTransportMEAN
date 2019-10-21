@@ -20,7 +20,7 @@ const UserSchema = new Schema ({
   accountStatus: { type: String },
   publicId: { type: String },
   verified: { type: Boolean },
-  tickets: { type: [TicketSchema] },
+  tickets: [{ type: Schema.Types.ObjectID, ref: 'Ticket'}],
   userRole: { type: String }
   /* name: { type: String },
   surname: { type: String },

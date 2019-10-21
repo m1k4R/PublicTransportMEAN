@@ -11,7 +11,8 @@ const TicketSchema = new Schema ({
   ticketType: { type: String},
   isValid: { type: Boolean},
   user: { type: Schema.Types.ObjectID, ref: 'User'},
-  priceInfo: { type: PricelistItemSchema}
+  priceInfo: { type: Schema.Types.ObjectID, ref: 'PricelistItem'},
+  paypalInfo: { type: Schema.Types.ObjectID, ref: 'Paypal'},
 });
 
 module.exports = {
