@@ -25,12 +25,19 @@ export class MyTicketComponent implements OnInit {
   ngOnInit() {
     this.userService.getUser(this.authService.decodedToken.userId).subscribe(next => {
       this.user = next;
-      if (this.user.tickets === undefined || this.user.tickets.length < 1) {
+      if (this.user.tickets === undefined || this.user.tickets === null) {
         console.log('No ticket');
         this.ticket = false;
       } else {
-        console.log('Yes ticket');
-        this.ticket = true;
+        if (this.user.tickets.length < 1) {
+          console.log('No ticket');
+        this.ticket = false;
+        }
+        else {
+          console.log('Yes ticket');
+          this.ticket = true;
+        }
+
       }
       console.log(next);
     }, error => {

@@ -13,4 +13,6 @@ export interface UserRegister {
     documentUrl?: string;
     accountStatus?: string;
     verified?: boolean;
+    publicId?: string;
+    image?: File;
 }

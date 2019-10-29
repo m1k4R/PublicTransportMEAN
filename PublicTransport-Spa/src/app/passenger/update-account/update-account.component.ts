@@ -25,6 +25,7 @@ export class UpdateAccountComponent implements OnInit {
   uploader: FileUploader;
   hasBaseDropZoneOver = false;
   baseUrl = environment.apiUrl;
+  imagePreview: any;
 
   constructor(private authService: AuthService, private fb: FormBuilder, private alertify: AlertifyService,
               private route: ActivatedRoute, private userService: UserService, private router: Router) { }
@@ -35,15 +36,16 @@ export class UpdateAccountComponent implements OnInit {
       this.user = data.user;
     });
     console.log(this.user);
+    this.imagePreview = this.user.documentUrl;
     this.bsConfig = {
       containerClass: 'theme-orange'
     };
-    //this.createRegiserForm();
+    // this.createRegiserForm();
     this.createUpdateForm();
-    this.initializeUploader();
+    //this.initializeUploader();
   }
 
-  fileOverBase(e: any): void {
+  /* fileOverBase(e: any): void {
     this.hasBaseDropZoneOver = e;
   }
 
@@ -64,12 +66,26 @@ export class UpdateAccountComponent implements OnInit {
       if (response) {
         const res: any = JSON.parse(response);
         this.user.documentUrl = res.url;
-        //this.user.publicId = res.id;
+        this.user.publicId = res.id;
         this.alertify.success('Added document image successfuly');
       } else {
         this.alertify.error('Added document image unsuccessful');
       }
     };
+  } */
+
+
+  onImagePicked(event: Event) {
+    const file = (event.target as HTMLInputElement).files[0];
+    this.updateForm.patchValue({image: file});
+    this.updateForm.get('image').updateValueAndValidity();
+    // console.log(file);
+    // console.log(this.updateForm);
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagePreview = reader.result;
+    };
+    reader.readAsDataURL(file);
   }
 
   createUpdateForm() {
@@ -88,6 +104,7 @@ export class UpdateAccountComponent implements OnInit {
       street: [this.user.street, Validators.required],
       number: [this.user.number, Validators.required],
       city: [this.user.city, Validators.required],
+      image: [this.user.documentUrl],
     }, {validator: this.passwordMatchValidator});
   }
 
@@ -115,7 +132,9 @@ export class UpdateAccountComponent implements OnInit {
   updateAccount() {
     if (this.updateForm.valid) {
       this.userUpdate = Object.assign({}, this.updateForm.value);
-      this.userService.updateAccount(this.userUpdate, this.authService.decodedToken.userId).subscribe(() => {
+      console.log(this.updateForm.value.image);
+      console.log(this.userUpdate.image);
+      this.userService.updateAccount(this.userUpdate, this.authService.decodedToken.userId, this.updateForm.value.image).subscribe(() => {
         this.alertify.success('Account successfully updated');
       }, error => {
         this.alertify.error(error);

@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
 const app = express();
 const { mongoose } = require('./database');
 
@@ -11,6 +12,7 @@ const bcrypt = require('bcrypt');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use('/images', express.static(path.join('backend/images')));
 
 //CORS
 

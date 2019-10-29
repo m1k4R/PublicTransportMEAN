@@ -156,7 +156,7 @@
         </form>
       </div>
       <div class="col">
-        <table class="moiClassTimeTable" style="color: white">
+        <!-- <table class="moiClassTimeTable" style="color: white">
           <thead></thead>
           <tbody>
             <tr>
@@ -217,6 +217,41 @@
                   <span class="fa fa-trash"></span> Remove
                 </button>
               </td>
+            </tr>
+          </tbody>
+        </table> -->
+        <table class="moiClassTimeTable" style="color: white">
+          <thead>
+            <tr>
+              <th colspan="3">
+                Add Document
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td colspan="3">
+                &nbsp;
+              </td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td>
+                <button class="btn btn-lg btn-primary btn-block btn-signin" style="background-color: gray" type="button" (click)="filePicker.click()">Pick Image</button>
+                <input hidden type="file" #filePicker (change)="onImagePicked($event)">
+              </td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                  &nbsp;
+                </td>
+              </tr>
+            <tr>
+                <td colspan="3" *ngIf="imagePreview !== '' && imagePreview">
+                  <img [src]="imagePreview" [alt]="" class="img-thumbnail" m-2
+                    style="width: 350% !important; height: 300px !important;">
+                </td>
             </tr>
           </tbody>
         </table>

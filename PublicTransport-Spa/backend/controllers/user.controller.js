@@ -204,6 +204,12 @@ userController.getUsers = async (req, res) => {
 
 userController.editUser = async (req, res) => {
   const { userId } = req.params;
+  let imagePath = req.body.documentUrl;
+  if (req.file) {
+    let url = req.protocol + '://' + req.get('host');
+    imagePath = url + '/images/' + req.file.filename;
+  }
+
   //const hashPass = bcrypt.hash(req.body.password, 10);
   bcrypt.hash(req.body.password, 10)
     .then(async hash => {
@@ -218,7 +224,7 @@ userController.editUser = async (req, res) => {
         street: req.body.street,
         number: req.body.number,
         dateOfBirth: req.body.dateOfBirth,
-        documentUrl: req.body.documentUrl,
+        documentUrl: imagePath,
         accountStatus: req.body.accountStatus,
         publicId: req.body.publicId,
         verified: req.body.verified,

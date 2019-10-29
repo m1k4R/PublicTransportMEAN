@@ -49,8 +49,33 @@ getUsers(): Observable<UserRegister[]> {
   return this.http.get<UserRegister[]>(this.baseUrl + 'user/getUsers');
 }
 
-updateAccount(user: UserRegister, userId: string) {
-  return this.http.put(this.baseUrl + 'user/editUser/' + userId, user);
+updateAccount(user: UserRegister, userId: string, image: File | string) {
+  let isVerified = 'false';
+  if (user.verified) {
+    isVerified = 'true';
+  }
+  if (typeof(image) === 'object') {
+    const postData = new FormData();
+    postData.append('userName', user.userName);
+    postData.append('userType', user.userType);
+    postData.append('email', user.email);
+    postData.append('password', user.password);
+    postData.append('name', user.name);
+    postData.append('surname', user.surname);
+    postData.append('city', user.city);
+    postData.append('street', user.street);
+    postData.append('number', user.number);
+    postData.append('dateOfBirth', user.dateOfBirth.toDateString());
+    postData.append('accountStatus', user.accountStatus);
+    postData.append('verified', isVerified);
+    postData.append('image', image);
+    postData.append('userId', userId);
+    return this.http.put(this.baseUrl + 'user/editUser/' + userId, postData);
+  } else {
+    user.documentUrl = image;
+    return this.http.put(this.baseUrl + 'user/editUser/' + userId, user);
+  }
+  // return this.http.put(this.baseUrl + 'user/editUser/' + userId, user);
 }
 
 buyTicketAnonimus(ticketType, email): Observable<Ticket> {
