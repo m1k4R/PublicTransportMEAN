@@ -9,6 +9,8 @@ import { Station } from 'src/app/_models/station';
 import { SignalRService } from 'src/app/_services/signal-r.service';
 import { HttpClient } from '@angular/common/http';
 import { BusLocation } from 'src/app/_models/busLocation';
+import { SocketioService } from 'src/app/_services/socketio.service';
+// import { io } from 'socket.io';
 
 @Component({
   selector: 'app-timetable',
@@ -57,14 +59,28 @@ export class TimetableComponent implements OnInit, OnDestroy {
   deltaLng: any;
 
   constructor(private alertify: AlertifyService, private router: ActivatedRoute, private route: Router,
-              public signalRService: SignalRService, private http: HttpClient) { }
+              public signalRService: SignalRService, private http: HttpClient, private socketService: SocketioService) { }
 
   ngOnInit() {
     this.router.data.subscribe(data => {
       this.allTimetables = data.timetables;
       this.allLines = data.lines;
-      this.signalRService.startConnection();
+      // io()
+      /* this.signalRService.startConnection();
       const busLocationObservable = this.signalRService.addTransferBusLocationListener();
+      busLocationObservable.subscribe((locationData: BusLocation) => {
+        // console.log('linija: ' + this.selectedLine + 'dobijena linija: ' + locationData.lineId);
+        if (locationData.lineId == this.selectedLine) {
+          // console.log('Primljena linija je: ' + locationData.lineId);
+          if (this.busLocation === undefined) {
+            this.busLocation = locationData;
+            // console.log("Prvi " + this.busLocation.x + " " + this.busLocation.y);
+          } else {
+            this.transition(locationData);
+          }
+        }
+      }); */
+      const busLocationObservable = this.socketService.getBusLocation();
       busLocationObservable.subscribe((locationData: BusLocation) => {
         // console.log('linija: ' + this.selectedLine + 'dobijena linija: ' + locationData.lineId);
         if (locationData.lineId == this.selectedLine) {
@@ -103,6 +119,8 @@ export class TimetableComponent implements OnInit, OnDestroy {
         this.moveMarker();
       }, this.delay);
       // console.log("Zovi");
+    } else {
+      this.socketService.sendNextBusLocation();
     }
   }
 
@@ -110,12 +128,12 @@ export class TimetableComponent implements OnInit, OnDestroy {
     this.signalRService.stopConnection();
   }
 
-  private startHttpRequest = (lineId: string) => {
+  /* private startHttpRequest = (lineId: string) => {
     this.http.get('http://localhost:5000/api/busLocation?lineId=' + lineId)
       .subscribe(res => {
         console.log(res);
       });
-  }
+  } */
 
   dayChanged(day: string) {
     this.day = day;
@@ -125,14 +143,15 @@ export class TimetableComponent implements OnInit, OnDestroy {
     this.type = type;
   }
 
-  lineChanged(id: string) {
-    this.selectedLine = id;
+  lineChanged(lineId: string) {
+    this.selectedLine = lineId;
     this.allStations = null;
     this.allStations = new Array<Station>();
     this.hideDirections();
     this.showTimetable();
     this.initializeRoutes();
-    this.startHttpRequest(id);
+    // this.startHttpRequest(id);
+    this.socketService.sendLineId(lineId);
   }
 
   showTimetable() {

@@ -238,7 +238,7 @@ adminController.updateUserDiscount = async (req, res) => {
 
   const userDiscountExist = await UserDiscount.find({ type: discType });
 
-  if (userDiscountExist != [])
+  if (userDiscountExist != [])  // popraviti kao u app. ispitati da li je userDiscountExist.length >= 0
   {
     console.log('postoji');
     console.log(userDiscountExist);

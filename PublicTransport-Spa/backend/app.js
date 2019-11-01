@@ -79,7 +79,7 @@ app.use((req, res, next) => {
   res.send('Hello from express!');
 }); */
 
-app.post("/api/posts" ,(req, res, next) => {
+/* app.post("/api/posts" ,(req, res, next) => {
   const post = req.body;
   console.log(post);
   res.status(201).json({
@@ -101,12 +101,11 @@ app.use("/api/posts" ,(req, res, next) => {
     }
   ];
 
-  /* res.send('Hello from express!'); */
   res.status(200).json({
     message: "Posts Successfully!",
     posts: posts
   });
-});
+}); */
 
 
 
