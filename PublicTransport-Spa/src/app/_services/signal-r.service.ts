@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+/* import { Injectable } from '@angular/core';
 import { Location } from '../_models/location';
 import * as signalR from '@aspnet/signalr';
 import { BusLocation } from '../_models/busLocation';
@@ -41,3 +41,4 @@ public addTransferBusLocationListener = () => {
 }
 
 }
+ */

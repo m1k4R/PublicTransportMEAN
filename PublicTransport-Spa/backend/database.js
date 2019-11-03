@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const URI = 'mongodb://localhost/testdb';    //publictransportdb
+const URI = 'mongodb://localhost/publictransportdb';
 
 mongoose.connect(URI)
     .then(db => console.log('DB is connected'))

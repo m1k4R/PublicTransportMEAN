@@ -6,7 +6,7 @@ import { TimeTable } from 'src/app/_models/timeTable';
 import { Departures } from 'src/app/_models/departures';
 import { Directions } from 'src/app/_models/directions';
 import { Station } from 'src/app/_models/station';
-import { SignalRService } from 'src/app/_services/signal-r.service';
+// import { SignalRService } from 'src/app/_services/signal-r.service';
 import { HttpClient } from '@angular/common/http';
 import { BusLocation } from 'src/app/_models/busLocation';
 import { SocketioService } from 'src/app/_services/socketio.service';
@@ -59,7 +59,7 @@ export class TimetableComponent implements OnInit, OnDestroy {
   deltaLng: any;
 
   constructor(private alertify: AlertifyService, private router: ActivatedRoute, private route: Router,
-              public signalRService: SignalRService, private http: HttpClient, private socketService: SocketioService) { }
+              private http: HttpClient, private socketService: SocketioService) { } // public signalRService: SignalRService,
 
   ngOnInit() {
     this.router.data.subscribe(data => {
@@ -88,6 +88,7 @@ export class TimetableComponent implements OnInit, OnDestroy {
           if (this.busLocation === undefined) {
             this.busLocation = locationData;
             // console.log("Prvi " + this.busLocation.x + " " + this.busLocation.y);
+            this.socketService.sendNextBusLocation();
           } else {
             this.transition(locationData);
           }
@@ -120,12 +121,13 @@ export class TimetableComponent implements OnInit, OnDestroy {
       }, this.delay);
       // console.log("Zovi");
     } else {
+      // console.log("Zovi");
       this.socketService.sendNextBusLocation();
     }
   }
 
   ngOnDestroy() {
-    this.signalRService.stopConnection();
+    // this.signalRService.stopConnection();
   }
 
   /* private startHttpRequest = (lineId: string) => {
