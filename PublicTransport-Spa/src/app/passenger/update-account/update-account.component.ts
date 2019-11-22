@@ -31,7 +31,7 @@ export class UpdateAccountComponent implements OnInit {
               private route: ActivatedRoute, private userService: UserService, private router: Router) { }
 
   ngOnInit() {
-    console.log('00USao ovde');
+    // console.log('00USao ovde');
     this.route.data.subscribe(data => {
       this.user = data.user;
     });
@@ -137,7 +137,8 @@ export class UpdateAccountComponent implements OnInit {
       this.userService.updateAccount(this.userUpdate, this.authService.decodedToken.userId, this.updateForm.value.image).subscribe(() => {
         this.alertify.success('Account successfully updated');
       }, error => {
-        this.alertify.error(error);
+        // this.alertify.error(error);
+        this.alertify.error('Account update failed');
       });
     }
   }

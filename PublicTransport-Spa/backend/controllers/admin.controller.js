@@ -237,17 +237,17 @@ adminController.updateUserDiscount = async (req, res) => {
   const newUserDiscount = new UserDiscount(req.body);
 
   const userDiscountExist = await UserDiscount.find({ type: discType });
-
-  if (userDiscountExist != [])  // popraviti kao u app. ispitati da li je userDiscountExist.length >= 0
+  console.log(userDiscountExist.length);
+  if (userDiscountExist.length == 0)  // popraviti kao u app. ispitati da li je userDiscountExist.length >= 0
+  {
+    console.log('novi pravi');
+    await newUserDiscount.save();
+  }
+  else
   {
     console.log('postoji');
     console.log(userDiscountExist);
     await UserDiscount.findOneAndUpdate({ type: discType }, {$set: userDiscount});
-  }
-  else
-  {
-    console.log('novi pravi');
-    await newUserDiscount.save();
   }
 
 

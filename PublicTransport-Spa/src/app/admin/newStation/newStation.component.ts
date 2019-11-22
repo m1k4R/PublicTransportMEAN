@@ -108,7 +108,7 @@ export class NewStationComponent implements OnInit {
           this.alertify.success('Station updated!');
           this.route.navigate(['/viewStations']);
         }, error => {
-          this.alertify.error('Error while adding new station');
+          this.alertify.error('Error while updating station');
         });
       }
     } else {

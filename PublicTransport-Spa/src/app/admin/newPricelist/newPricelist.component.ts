@@ -114,10 +114,11 @@ export class NewPricelistComponent implements OnInit {
         this.newPricelist.idAnnual = this.editPricelist.idAnnual;
         this.newPricelist.active = this.isActive; */
         this.adminService.updatePricelist(this.pricelistItem, this.idForUpdate).subscribe(() => {
-          this.alertify.success('Successfully created pricelist');
+          this.alertify.success('Successfully updated pricelist');
           this.route.navigate(['/viewPricelist']);
         }, error => {
-          this.alertify.error(error);
+          // this.alertify.error(error);
+          this.alertify.error('Error while updating pricelist');
         });
       }
     } else {
@@ -130,7 +131,7 @@ export class NewPricelistComponent implements OnInit {
         this.item.typeH = 'Hourly';
         this.item.typeD = 'Daily';
         this.item.typeM = 'Monthly';
-        this.item.typeA = 'Hourly';
+        this.item.typeA = 'Annual';
         this.pricelistItem.pricelist = this.pricelist;
         this.pricelistItem.item = this.item;
         this.pricelistItem.priceH = this.newPricelist.priceHourly;
@@ -143,7 +144,8 @@ export class NewPricelistComponent implements OnInit {
           this.alertify.success('Successfully created pricelist');
           this.route.navigate(['/viewPricelist']);
         }, error => {
-          this.alertify.error(error);
+         //  this.alertify.error(error);
+         this.alertify.error('Error while adding new pricelist');
         });
       }
     }

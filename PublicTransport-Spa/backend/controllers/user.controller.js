@@ -1,5 +1,6 @@
 const userController = {};
 
+const nodemailer = require('nodemailer');
 const Pricelist = require('../models/pricelist');
 const Item = require('../models/item');
 const PricelistItem = require('../models/pricelistItem');
@@ -107,7 +108,7 @@ userController.getTicketsPrices = async (req, res) => {
   const pricelist = await PricelistItemModel.find({ "pricelist.active": true });
   //console.log(pricelist);
   //console.log(req.params.userId);
-
+  
   if (req.params.userId != undefined && req.params.userId != 'none') {
     const user = await UserModel.find({ _id: req.params.userId });
     console.log(user[0].userType);
@@ -119,8 +120,6 @@ userController.getTicketsPrices = async (req, res) => {
     pricelist[0].priceA = pricelist[0].priceA - (pricelist[0].priceA * (discount[0].value / 100));
     //console.log(pricelist);
   }
-
-  // Treba provjeriti tip ulogovanog korisnika pa na osnovu toga uracunati popust kao u f-ji iznad
 
   res.json(pricelist);
 };
@@ -168,7 +167,36 @@ userController.buyTicketAnonimus = async (req, res) => {
     priceInfo: pricelist[0]._id
   });
   const createdTicket = await ticket.save();
+
   // Send email
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',//gmail or smtp.gmail.com
+    //secure: true,//false
+    //port: 465,//25
+    auth: {
+      user: 'lunasavic62@gmail.com',
+      pass: 'pass'
+    }/* , tls: {
+      rejectUnauthorized: false
+    } */
+  });
+
+  var mailOptions = {
+    from: 'lunasavic62@gmail.com',
+    to: 'milijana.radovic96@gmail.com',
+    subject: 'Public Transport - Ticket',
+    text: 'Your ticket.'
+  };
+
+  transporter.sendMail(mailOptions, function(error, info) {
+    console.log('kao nesto');
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
+  });
+
   res.json(createdTicket);
 
 };

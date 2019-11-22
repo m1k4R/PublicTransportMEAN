@@ -136,9 +136,11 @@ export class NewLineComponent implements OnInit {
     // this.adminService.busNotInUse(busNotInUse._id, busNotInUse);
 
     this.adminService.busInUse(busNotInUse._id, busNotInUse).subscribe(next => {
-      this.alertify.success('Bus not in use!');
+      // this.alertify.success('Bus not in use!');
+      console.log('Bus not in use!');
     }, error => {
-      this.alertify.error('Error while bus not in use');
+      // this.alertify.error('Error while bus not in use');
+      console.log('Error while bus not in use');
     });
 
     const index = this.newLineBuses.indexOf(this.newLineBuses.find(bus => bus._id === this.selectedBus));
@@ -156,9 +158,11 @@ export class NewLineComponent implements OnInit {
     // this.adminService.busInUse(busInUse._id, busInUse);
 
     this.adminService.busInUse(busInUse._id, busInUse).subscribe(next => {
-      this.alertify.success('Bus in use!');
+      // this.alertify.success('Bus in use!');
+      console.log('Bus in use!');
     }, error => {
-      this.alertify.error('Error while bus in use');
+      // this.alertify.error('Error while bus in use');
+      console.log('Error while bus in use');
     });
 
     const index = this.allBuses.indexOf(this.allBuses.find(bus => bus._id === this.selectedBusToAdd));
