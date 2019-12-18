@@ -26,8 +26,9 @@ export class ControllerService {
     return this.http.put(this.baseUrl + 'moderator/validateTicket/' + ticketId, params);
   }
 
-  getTickets() {
-    return this.http.get<Observable<Ticket[]>>(this.baseUrl + 'moderator/getTickets');
+  getTickets(pageSize: number, currentPage: number) {
+    const queryParams = `?pageSize=${pageSize}&currentPage=${currentPage}`;
+    return this.http.get<{tickets: Observable<Ticket[]>, count: number}>(this.baseUrl + 'moderator/getTickets' + queryParams);
   }
 
 }

@@ -25,8 +25,9 @@ createNewStation(station: Station) {
   return this.http.post(this.baseUrl + 'admin/addStation', station);
 }
 
-getStations() {
-  return this.http.get<Observable<Station[]>>(this.baseUrl + 'admin/getStations');
+getStations(pageSize: number, currentPage: number) {
+  const queryParams = `?pageSize=${pageSize}&currentPage=${currentPage}`;
+  return this.http.get<{stations: Observable<Station[]>, count: number}>(this.baseUrl + 'admin/getStations' + queryParams);
 }
 
 getStation(stationId: string) {
@@ -45,8 +46,9 @@ createNewLine(line: Line) {
   return this.http.post(this.baseUrl + 'admin/addLine', line);
 }
 
-getLines() {
-  return this.http.get<Observable<Line[]>>(this.baseUrl + 'admin/getLines');
+getLines(pageSize: number, currentPage: number) {
+  const queryParams = `?pageSize=${pageSize}&currentPage=${currentPage}`;
+  return this.http.get<{lines: Observable<Line[]>, count: number}>(this.baseUrl + 'admin/getLines' + queryParams);
 }
 
 getLine(lineId: string) {
@@ -77,8 +79,9 @@ createPricelist(pricelist: PricelistItem) {
   return this.http.post(this.baseUrl + 'admin/addPricelist', pricelist);
 }
 
-getPricelists() {
-  return this.http.get<Observable<PricelistItem[]>>(this.baseUrl + 'admin/getAllPricelists');
+getPricelists(pageSize: number, currentPage: number) {
+  const queryParams = `?pageSize=${pageSize}&currentPage=${currentPage}`;
+  return this.http.get<{pricelists: Observable<PricelistItem[]>, count: number}>(this.baseUrl + 'admin/getAllPricelists' + queryParams);
 }
 
 getPricelist(pricelistId: string) {
@@ -97,8 +100,9 @@ createNewTimetable(timetable: TimeTable) {
   return this.http.post(this.baseUrl + 'admin/addTimetable', timetable);
 }
 
-getTimetables() {
-  return this.http.get<Observable<TimeTable[]>>(this.baseUrl + 'admin/getTimetables');
+getTimetables(pageSize: number, currentPage: number) {
+  const queryParams = `?pageSize=${pageSize}&currentPage=${currentPage}`;
+  return this.http.get<{timetables: Observable<TimeTable[]>, count: number}>(this.baseUrl + 'admin/getTimetables' + queryParams);
 }
 
 getTimetable(timetableId: string) {

@@ -13,12 +13,26 @@ export class ViewPricelistComponent implements OnInit {
   isCollapsedPrices = true;
   allPricelists: PricelistItem[];
 
+  currentPage: number = 1;
+  totalItems = 10;
+  itemsPerPage = 5;
+
   constructor(private adminService: AdminService, private alertify: AlertifyService,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
-      this.allPricelists = data.pricelists;
+      this.allPricelists = data.pricelists.pricelists;
+      this.totalItems = data.pricelists.count;
+    });
+  }
+
+  onChangedPage(pageData: any) {
+    console.log(pageData);
+    this.currentPage = pageData;
+    this.adminService.getPricelists(this.itemsPerPage, this.currentPage).subscribe(data => {
+      this.allPricelists = data.pricelists as unknown as PricelistItem[];
+      this.totalItems = data.count;
     });
   }
 

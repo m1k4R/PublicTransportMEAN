@@ -226,8 +226,24 @@ userController.getUser = async (req, res) => {
 };
 
 userController.getUsers = async (req, res) => {
-  const users = await UserModel.find();
-  res.json(users);
+  /* const users = await UserModel.find();
+  res.json(users); */
+
+  console.log(req.query);
+  const pageSize = +req.query.pageSize;
+  const currentPage = +req.query.currentPage;
+  //console.log(pageSize);
+  //console.log(currentPage);
+
+  const count = await (await UserModel.find()).length;
+  console.log(count);
+  const users = await UserModel.find()
+                                .skip(pageSize * (currentPage - 1))
+                                .limit(pageSize)
+                                .then(users => {
+                                  res.json({ users: users,
+                                              count: count });
+                                });
 };
 
 userController.editUser = async (req, res) => {

@@ -13,12 +13,26 @@ export class ViewStationsComponent implements OnInit {
   isCollapsed = true;
   allStations: Station[];
 
+  currentPage: number = 1;
+  totalItems = 10;
+  itemsPerPage = 5;
+
   constructor(private adminService: AdminService, private alertify: AlertifyService,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
-      this.allStations = data.stations;
+      this.allStations = data.stations.stations;
+      this.totalItems = data.stations.count;
+    });
+  }
+
+  onChangedPage(pageData: any) {
+    console.log(pageData);
+    this.currentPage = pageData;
+    this.adminService.getStations(this.itemsPerPage, this.currentPage).subscribe(data => {
+      this.allStations = data.stations as unknown as Station[];
+      this.totalItems = data.count;
     });
   }
 

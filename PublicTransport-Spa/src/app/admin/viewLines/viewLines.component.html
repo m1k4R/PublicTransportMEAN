@@ -24,7 +24,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let line of allLines">
+        <tr *ngFor="let line of allLines | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage, totalItems: totalItems }"> <!-- [totalItems]="totalItems" -->
           <th scope="row">{{line?._id}}</th>
           <td>{{line?.lineNumber}}</td>
           <td style="font-size: 12px">{{line?.name}}</td>
@@ -41,6 +41,11 @@
           <td><button [routerLink]="['/newLine',{lineId: line._id}]" routerLinkActive="router-link-active"
               class="btn btn-default moiClassButton">Edit</button></td>
           <td><i class="fa fa-trash moiClassButtonTable" (click)="deleteLine(line._id)"></i></td>
+        </tr>
+        <tr>
+          <th colspan="7">
+            <pagination-controls (pageChange)="onChangedPage($event)"></pagination-controls> <!-- p = $event -->
+          </th>
         </tr>
       </tbody>
     </table>

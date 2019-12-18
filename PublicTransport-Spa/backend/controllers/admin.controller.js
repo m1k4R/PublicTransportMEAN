@@ -32,8 +32,26 @@ adminController.getLine = async (req, res) => {
 };
 
 adminController.getLines = async (req, res) => {
-  const lines = await LineModel.find().populate('stations');
-  res.json(lines);
+  console.log(req.query);
+  const pageSize = +req.query.pageSize;
+  const currentPage = +req.query.currentPage;
+  //console.log(pageSize);
+  //console.log(currentPage);
+
+  /* const lines = await LineModel.find().populate('stations').then(lines => {
+    res.json(lines);
+  }); */
+  const count = await (await LineModel.find()).length;
+  console.log(count);
+  const lines = await LineModel.find().populate('stations')
+                                .skip(pageSize * (currentPage - 1))
+                                .limit(pageSize)
+                                .then(lines => {
+                                  //res.json(lines);
+                                  res.json({ lines: lines,
+                                              count: count });
+                                });
+  
 };
 
 adminController.removeLine = async (req, res) => {
@@ -116,8 +134,25 @@ adminController.getStation = async (req, res) => {
 };
 
 adminController.getStations = async (req, res) => {
-  const stations = await StationModel.find().populate('lines');
-  res.json(stations);
+  /* const stations = await StationModel.find().populate('lines');
+  res.json(stations); */
+
+  console.log(req.query);
+  const pageSize = +req.query.pageSize;
+  const currentPage = +req.query.currentPage;
+  //console.log(pageSize);
+  //console.log(currentPage);
+
+  const count = await (await StationModel.find()).length;
+  console.log(count);
+  const stations = await StationModel.find().populate('lines')
+                                .skip(pageSize * (currentPage - 1))
+                                .limit(pageSize)
+                                .then(stations => {
+                                  //res.json(lines);
+                                  res.json({ stations: stations,
+                                              count: count });
+                                });
 
 };
 
@@ -169,9 +204,24 @@ adminController.getPricelist = async (req, res) => {
 };
 
 adminController.getPricelists = async (req, res) => {
-  const pricelists = await PricelistItemModel.find();
-  res.json(pricelists);
+  /* const pricelists = await PricelistItemModel.find();
+  res.json(pricelists); */
 
+  console.log(req.query);
+  const pageSize = +req.query.pageSize;
+  const currentPage = +req.query.currentPage;
+  //console.log(pageSize);
+  //console.log(currentPage);
+
+  const count = await (await PricelistItemModel.find()).length;
+  console.log(count);
+  const pricelists = await PricelistItemModel.find()
+                                .skip(pageSize * (currentPage - 1))
+                                .limit(pageSize)
+                                .then(pricelists => {
+                                  res.json({ pricelists: pricelists,
+                                              count: count });
+                                });
 };
 
 adminController.removePricelist = async (req, res) => {
@@ -276,11 +326,30 @@ adminController.getTimetable = async (req, res) => {
 };
 
 adminController.getTimetables = async (req, res) => {
-  const timetables = await Timetable.find().populate({
+  /* const timetables = await Timetable.find().populate({
     path: 'line',
     populate: { path: 'stations' }
   });
-  res.json(timetables);
+  res.json(timetables); */
+
+  console.log(req.query);
+  const pageSize = +req.query.pageSize;
+  const currentPage = +req.query.currentPage;
+  //console.log(pageSize);
+  //console.log(currentPage);
+
+  const count = await (await Timetable.find()).length;
+  console.log(count);
+  const timetables = await Timetable.find().populate({
+                                  path: 'line',
+                                  populate: { path: 'stations' }
+                                })
+                                .skip(pageSize * (currentPage - 1))
+                                .limit(pageSize)
+                                .then(timetables => {
+                                  res.json({ timetables: timetables,
+                                              count: count });
+                                });
 
 };
 

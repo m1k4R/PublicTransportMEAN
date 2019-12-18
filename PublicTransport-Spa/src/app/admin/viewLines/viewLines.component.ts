@@ -14,12 +14,27 @@ export class ViewLinesComponent implements OnInit {
   isCollapsedBuses = true;
   allLines: Line[];
 
+  currentPage: number = 1;
+  totalItems = 10;
+  itemsPerPage = 5;
+  
+
   constructor(private adminService: AdminService, private alertify: AlertifyService,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
-      this.allLines = data.lines;
+      this.allLines = data.lines.lines;
+      this.totalItems = data.lines.count;
+    });
+  }
+
+  onChangedPage(pageData: any) {
+    console.log(pageData);
+    this.currentPage = pageData;
+    this.adminService.getLines(this.itemsPerPage, this.currentPage).subscribe(data => {
+      this.allLines = data.lines as unknown as Line[];
+      this.totalItems = data.count;
     });
   }
 

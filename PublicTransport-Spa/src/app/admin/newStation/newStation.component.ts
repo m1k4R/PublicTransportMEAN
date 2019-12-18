@@ -40,7 +40,7 @@ export class NewStationComponent implements OnInit {
     this.createStationForm();
 
     this.router.data.subscribe(data => {
-      this.allLines = data.lines;
+      this.allLines = data.lines.lines;
     });
 
     const id = this.router.snapshot.paramMap.get('stationId');

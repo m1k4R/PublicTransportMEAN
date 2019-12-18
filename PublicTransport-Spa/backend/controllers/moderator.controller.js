@@ -6,8 +6,24 @@ const TicketModel = Ticket.model;
 const UserModel = User.model;
 
 moderatorController.getTickets = async (req, res) => {
-  const tickets = await TicketModel.find().populate('user').populate('paypalInfo').populate('priceInfo');
-  res.json(tickets);
+  /* const tickets = await TicketModel.find().populate('user').populate('paypalInfo').populate('priceInfo');
+  res.json(tickets); */
+
+  console.log(req.query);
+  const pageSize = +req.query.pageSize;
+  const currentPage = +req.query.currentPage;
+  //console.log(pageSize);
+  //console.log(currentPage);
+
+  const count = await (await TicketModel.find()).length;
+  console.log(count);
+  const tickets = await TicketModel.find().populate('user').populate('paypalInfo').populate('priceInfo')
+                                .skip(pageSize * (currentPage - 1))
+                                .limit(pageSize)
+                                .then(tickets => {
+                                  res.json({ tickets: tickets,
+                                              count: count });
+                                });
 };
 
 moderatorController.verificateTicket = async (req, res) => {

@@ -16,13 +16,18 @@ export class ViewTimetablesComponent implements OnInit {
   allLines: Line[];
   departures: string[];
 
+  currentPage: number = 1;
+  totalItems = 10;
+  itemsPerPage = 5;
+
   constructor(private adminService: AdminService, private alertify: AlertifyService,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
-      this.allTimetables = data.timetables;
-      this.allLines = data.lines;
+      this.allTimetables = data.timetables.timetables;
+      this.totalItems = data.timetables.count;
+      this.allLines = data.lines.lines;
     });
 
     /* this.allTimetables.forEach(tmt => {
@@ -30,6 +35,15 @@ export class ViewTimetablesComponent implements OnInit {
       tmt.line = line;
     }); */
 
+  }
+
+  onChangedPage(pageData: any) {
+    console.log(pageData);
+    this.currentPage = pageData;
+    this.adminService.getTimetables(this.itemsPerPage, this.currentPage).subscribe(data => {
+      this.allTimetables = data.timetables as unknown as TimeTable[];
+      this.totalItems = data.count;
+    });
   }
 
   deleteTimetable(timetableId: string) {

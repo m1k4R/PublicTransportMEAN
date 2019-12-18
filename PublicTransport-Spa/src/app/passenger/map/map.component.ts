@@ -47,8 +47,8 @@ export class MapComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe(data => {
-      this.allLines = data.lines;
-      this.allStations = data.stations;
+      this.allLines = data.lines.lines;
+      this.allStations = data.stations.stations;
     });
 
     this.initializeRoutes();

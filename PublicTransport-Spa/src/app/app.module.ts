@@ -50,6 +50,7 @@ import { TimetableListResolver } from './_resolvers/timetableList.resolver';
 import { AgmDirectionModule } from 'agm-direction';
 import { NgxPayPalModule } from 'ngx-paypal';
 import { MyTicketComponent } from './passenger/myTicket/myTicket.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 export function getToken() {
   return localStorage.getItem('token');
@@ -104,7 +105,8 @@ export function getToken() {
       ModalModule.forRoot(),
       BrowserAnimationsModule,
       CollapseModule.forRoot(),
-      NgxPayPalModule
+      NgxPayPalModule,
+      NgxPaginationModule
   ],
   providers: [
      AuthService,

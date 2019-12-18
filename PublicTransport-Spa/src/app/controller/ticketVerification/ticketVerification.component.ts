@@ -15,12 +15,26 @@ export class TicketVerificationComponent implements OnInit {
   validatedTicket: Ticket;
   ticketId: string;
 
+  currentPage: number = 1;
+  totalItems = 10;
+  itemsPerPage = 5;
+
   constructor(private route: ActivatedRoute, private alertify: AlertifyService,
               private controllerService: ControllerService, private authService: AuthService) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
-      this.tickets = data.tickets;
+      this.tickets = data.tickets.tickets;
+      this.totalItems = data.tickets.count;
+    });
+  }
+
+  onChangedPage(pageData: any) {
+    console.log(pageData);
+    this.currentPage = pageData;
+    this.controllerService.getTickets(this.itemsPerPage, this.currentPage).subscribe(data => {
+      this.tickets = data.tickets as unknown as Ticket[];
+      this.totalItems = data.count;
     });
   }
 

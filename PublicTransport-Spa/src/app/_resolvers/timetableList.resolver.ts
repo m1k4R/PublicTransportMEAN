@@ -8,13 +8,13 @@ import { TimeTable } from '../_models/timeTable';
 
 @Injectable()
 export class TimetableListResolver implements Resolve<TimeTable[]> {
-    pageNumber = 1;
     pageSize = 5;
+    currentPage = 1;
 
     constructor(private router: Router, private alertify: AlertifyService, private adminService: AdminService) {}
 
     resolve(route: ActivatedRouteSnapshot): Observable<TimeTable[]> {
-        return this.adminService.getTimetables().pipe(
+        return this.adminService.getTimetables(this.pageSize, this.currentPage).pipe(
             catchError(error => {
                 this.alertify.error('Problem retrieving data');
                 this.router.navigate(['/home']);

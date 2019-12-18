@@ -45,8 +45,9 @@ getUser(userId): Observable<UserRegister> {
   return this.http.get<UserRegister>(this.baseUrl + 'user/getUser/' + userId);
 }
 
-getUsers(): Observable<UserRegister[]> {
-  return this.http.get<UserRegister[]>(this.baseUrl + 'user/getUsers');
+getUsers(pageSize: number, currentPage: number) {
+  const queryParams = `?pageSize=${pageSize}&currentPage=${currentPage}`;
+  return this.http.get<{users: Observable<UserRegister[]>, count: number}>(this.baseUrl + 'user/getUsers' + queryParams);
 }
 
 updateAccount(user: UserRegister, userId: string, image: File | string) {

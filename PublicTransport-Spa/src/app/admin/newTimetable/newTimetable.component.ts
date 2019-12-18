@@ -36,7 +36,7 @@ export class NewTimetableComponent implements OnInit {
     this.createTimetableForm();
 
     this.router.data.subscribe(data => {
-      this.allLines = data.lines;
+      this.allLines = data.lines.lines;
     });
 
     const id = this.router.snapshot.paramMap.get('timetableId');

@@ -8,14 +8,13 @@ import { Ticket } from '../_models/ticket';
 
 @Injectable()
 export class TicketVerificationResolver implements Resolve<any> {
-    pageNumber = 1;
     pageSize = 5;
-    likesParam = 'Likers';
+    currentPage = 1;
 
     constructor(private router: Router, private alertify: AlertifyService, private controllerService: ControllerService) {}
 
     resolve(route: ActivatedRouteSnapshot): Observable<Ticket[]> {
-        return this.controllerService.getTickets().pipe(
+        return this.controllerService.getTickets(this.pageSize, this.currentPage).pipe(
             catchError(error => {
                 this.alertify.error('Problem retrieving data');
                 this.router.navigate(['/home']);

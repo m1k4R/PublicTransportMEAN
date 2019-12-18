@@ -18,7 +18,7 @@
           <th scope="col"></th>
         </tr>
       </thead>
-      <tbody *ngFor="let timetable of allTimetables">
+      <tbody *ngFor="let timetable of allTimetables | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage, totalItems: totalItems }">
         <tr >
           <th scope="row">{{timetable?._id}}</th>
           <td>{{timetable?.type}}</td>
@@ -38,6 +38,11 @@
 
         </tr>
       </tbody>
+      <tr>
+        <th colspan="6">
+          <pagination-controls (pageChange)="onChangedPage($event)"></pagination-controls>
+        </th>
+      </tr>
     </table>
   </div>
 </div>

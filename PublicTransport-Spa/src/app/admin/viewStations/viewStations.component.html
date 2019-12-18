@@ -19,11 +19,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let station of allStations">
+        <tr *ngFor="let station of allStations | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage, totalItems: totalItems }">
           <th scope="row">{{station?._id}}</th>
           <td>{{station?.name}}</td>
           <td>{{station?.address?.street}}&nbsp;{{station?.address?.number}},{{station?.address?.city}}</td>
-          <td>({{station?.location?.x}}, {{station?.location?.y}})</td>
+          <td style="font-size: 13px">({{station?.location?.x}}, {{station?.location?.y}})</td>
           <td>
             <ul id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true" class="text-white" *ngFor="let line of station?.lines">
               <li>{{line?.lineNumber}}</li>
@@ -31,6 +31,11 @@
           </td>
           <td><button [routerLink]="['/newStation',{stationId: station._id}]" routerLinkActive="router-link-active"  class="btn btn-default moiClassButton">Edit</button></td>
           <td><i class="fa fa-trash moiClassButtonTable" (click)="deleteStation(station?._id)"></i></td>
+        </tr>
+        <tr>
+          <th colspan="7">
+            <pagination-controls (pageChange)="onChangedPage($event)"></pagination-controls>
+          </th>
         </tr>
       </tbody>
     </table>

@@ -6,6 +6,7 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 import { ControllerService } from 'src/app/_services/controller.service';
 import { AuthService } from 'src/app/_services/auth.service';
 import * as moment from 'moment';
+import { UserService } from 'src/app/_services/user.service';
 
 @Component({
   selector: 'app-userVerification',
@@ -16,12 +17,26 @@ export class UserVerificationComponent implements OnInit {
   users: UserRegister[];
   selectedUser: UserRegister;
 
+  currentPage: number = 1;
+  totalItems = 10;
+  itemsPerPage = 5;
+
   constructor(private route: ActivatedRoute, private alertify: AlertifyService,
-               private controllerService: ControllerService, private authService: AuthService) { }
+               private controllerService: ControllerService, private authService: AuthService, private userService: UserService) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
-      this.users = data.users;
+      this.users = data.users.users;
+      this.totalItems = data.users.count;
+    });
+  }
+
+  onChangedPage(pageData: any) {
+    console.log(pageData);
+    this.currentPage = pageData;
+    this.userService.getUsers(this.itemsPerPage, this.currentPage).subscribe(data => {
+      this.users = data.users as unknown as UserRegister[];
+      this.totalItems = data.count;
     });
   }
 

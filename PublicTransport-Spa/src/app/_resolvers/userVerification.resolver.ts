@@ -9,14 +9,13 @@ import { UserRegister } from '../_models/userRegister';
 
 @Injectable()
 export class UserVerificationResolver implements Resolve<any> {
-    pageNumber = 1;
     pageSize = 5;
-    likesParam = 'Likers';
+    currentPage = 1;
 
     constructor(private router: Router, private alertify: AlertifyService, private userService: UserService) {}
 
     resolve(route: ActivatedRouteSnapshot): Observable<UserRegister[]> {
-        return this.userService.getUsers().pipe(
+        return this.userService.getUsers(this.pageSize, this.currentPage).pipe(
             catchError(error => {
                 this.alertify.error('Problem retrieving data');
                 this.router.navigate(['/home']);

@@ -49,6 +49,11 @@ loggedIn() {
     this.userRole = this.decodedToken.userRole as String;
     // console.log(this.userRole);
   }
+
+  if (this.jwtHelper.isTokenExpired(token)) {
+    localStorage.removeItem("token");
+  }
+
   return !this.jwtHelper.isTokenExpired(token);
 
   //return false;
