@@ -27,7 +27,7 @@ export class ViewTimetablesComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.allTimetables = data.timetables.timetables;
       this.totalItems = data.timetables.count;
-      this.allLines = data.lines.lines;
+      this.allLines = data.lines;
     });
 
     /* this.allTimetables.forEach(tmt => {
@@ -49,8 +49,12 @@ export class ViewTimetablesComponent implements OnInit {
   deleteTimetable(timetableId: string) {
     this.adminService.deleteTimetable(timetableId).subscribe(next => {
       this.alertify.success('Timetable deleted');
-      const indx = this.allTimetables.indexOf(this.allTimetables.find(timetable => timetable._id === timetableId));
-      this.allTimetables.splice(indx, 1);
+      /* const indx = this.allTimetables.indexOf(this.allTimetables.find(timetable => timetable._id === timetableId));
+      this.allTimetables.splice(indx, 1); */
+      this.adminService.getTimetables(this.itemsPerPage, this.currentPage).subscribe(data => {
+        this.allTimetables = data.timetables as unknown as TimeTable[];
+        this.totalItems = data.count;
+      });
     }, error => {
       this.alertify.error('Failed to delete timetable');
     });

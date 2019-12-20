@@ -7,6 +7,7 @@ const checkAuth = require('../middleware/check-auth');  // path, checkAuth, func
 router.post('/addLine', admin.createLine);  // '/' + /addLine ili /addLine/
 router.get('/getLine/:lineId', admin.getLine);   // getLine?lineId= je u angularu vrv treba promjeniti
 router.get('/getLines', admin.getLines);
+router.get('/getAllLines', admin.getAllLines);
 router.put('/updateLine/:lineId', admin.editLine);
 router.delete('/removeLine/:lineId', admin.removeLine);
 
@@ -18,6 +19,7 @@ router.put('/busInUse/:busId', admin.busInUse);
 router.post('/addStation', admin.createStation);
 router.get('/getStation/:stationId', admin.getStation);
 router.get('/getStations', admin.getStations);
+router.get('/getAllStations', admin.getAllStations);
 router.put('/updateStation/:stationId', admin.editStation);
 router.delete('/removeStation/:stationId', admin.removeStation);
 
@@ -33,6 +35,7 @@ router.put('/updateUserDiscount/:discType', admin.updateUserDiscount);
 router.post('/addTimetable', admin.createTimetable);
 router.get('/getTimetable/:timetableId', admin.getTimetable);
 router.get('/getTimetables', admin.getTimetables);
+router.get('/getAllTimetables', admin.getAllTimetables);
 router.put('/updateTimetable/:timetableId', admin.editTimetable);
 router.delete('/removeTimetable/:timetableId', admin.removeTimetable);
 

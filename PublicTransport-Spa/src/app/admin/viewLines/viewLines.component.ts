@@ -41,11 +41,16 @@ export class ViewLinesComponent implements OnInit {
   deleteLine(lineId: string) {
     this.adminService.deleteLine(lineId).subscribe(next => {
       this.alertify.success('Line deleted');
-      const indx = this.allLines.indexOf(this.allLines.find(line => line._id === lineId));
-      this.allLines.splice(indx, 1);
+      /* const indx = this.allLines.indexOf(this.allLines.find(line => line._id === lineId));
+      this.allLines.splice(indx, 1); */
+      this.adminService.getLines(this.itemsPerPage, this.currentPage).subscribe(data => {
+        this.allLines = data.lines as unknown as Line[];
+        this.totalItems = data.count;
+      });
     }, error => {
       this.alertify.error('Failed to delete line');
     });
+    
   }
 
 }

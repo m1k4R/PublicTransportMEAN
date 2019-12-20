@@ -63,8 +63,8 @@ export class TimetableComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.router.data.subscribe(data => {
-      this.allTimetables = data.timetables.timetables;
-      this.allLines = data.lines.lines;
+      this.allTimetables = data.timetables;
+      this.allLines = data.lines;
       // io()
       /* this.signalRService.startConnection();
       const busLocationObservable = this.signalRService.addTransferBusLocationListener();

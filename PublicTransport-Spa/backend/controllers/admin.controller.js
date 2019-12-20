@@ -54,6 +54,13 @@ adminController.getLines = async (req, res) => {
   
 };
 
+adminController.getAllLines = async (req, res) => {
+  const lines = await LineModel.find().populate('stations').then(lines => {
+    res.json(lines);
+  });
+  
+};
+
 adminController.removeLine = async (req, res) => {
   const line = await LineModel.findById(req.params.lineId).populate('stations');
   if (line.buses != null && line.buses != undefined)
@@ -154,6 +161,11 @@ adminController.getStations = async (req, res) => {
                                               count: count });
                                 });
 
+};
+
+adminController.getAllStations = async (req, res) => {
+  const stations = await StationModel.find().populate('lines');
+  res.json(stations);
 };
 
 adminController.removeStation = async (req, res) => {
@@ -350,6 +362,15 @@ adminController.getTimetables = async (req, res) => {
                                   res.json({ timetables: timetables,
                                               count: count });
                                 });
+
+};
+
+adminController.getAllTimetables = async (req, res) => {
+  const timetables = await Timetable.find().populate({
+    path: 'line',
+    populate: { path: 'stations' }
+  });
+  res.json(timetables);
 
 };
 

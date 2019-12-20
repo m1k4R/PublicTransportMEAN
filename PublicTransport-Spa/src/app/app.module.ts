@@ -51,6 +51,9 @@ import { AgmDirectionModule } from 'agm-direction';
 import { NgxPayPalModule } from 'ngx-paypal';
 import { MyTicketComponent } from './passenger/myTicket/myTicket.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { AllLinesResolver } from './_resolvers/allLines.resolver';
+import { AllStationsResolver } from './_resolvers/allStations.resolver';
+import { AllTimetablestResolver } from './_resolvers/allTimetables.resolver';
 
 export function getToken() {
   return localStorage.getItem('token');
@@ -124,7 +127,10 @@ export function getToken() {
      LineListResolver,
      BusListResolver,
      PriceListAdminResolver,
-     TimetableListResolver
+     TimetableListResolver,
+     AllLinesResolver,
+     AllStationsResolver,
+     AllTimetablestResolver
   ],
   bootstrap: [
      AppComponent

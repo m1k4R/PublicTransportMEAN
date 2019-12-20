@@ -24,3 +24,13 @@
     color: white;
     font-weight: bold;
 }
+
+.moiClassTimeTable {
+    padding: 0%;
+}
+
+table.moiClassTimeTable td, th {
+    padding: 1%;
+    vertical-align: middle;
+    text-align: center;
+}

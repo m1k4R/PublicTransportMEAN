@@ -86,7 +86,7 @@ moderatorController.verificateTicket = async (req, res) => {
   //console.log(verifyTicket);
   const verificatedTicket = await TicketModel.findByIdAndUpdate(req.params.ticketId, {$set: verifyTicket});
   //console.log(verificatedTicket);
-  res.json(verificatedTicket);
+  res.json(verifyTicket);
 };
 
 moderatorController.verificateUser = async (req, res) => {

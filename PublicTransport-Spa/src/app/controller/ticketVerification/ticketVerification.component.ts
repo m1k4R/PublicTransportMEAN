@@ -41,8 +41,12 @@ export class TicketVerificationComponent implements OnInit {
   checkTicket(ticketId) {
     this.controllerService.verificateTicket(ticketId).subscribe(next => {
       const ticketResult = next as Ticket;
-      const indx = this.tickets.indexOf(this.tickets.find(ticket => ticket._id === ticketId));
-      this.tickets[indx].isValid = ticketResult.isValid;
+      /* const indx = this.tickets.indexOf(this.tickets.find(ticket => ticket._id === ticketId));
+      this.tickets[indx].isValid = ticketResult.isValid; */
+      this.controllerService.getTickets(this.itemsPerPage, this.currentPage).subscribe(data => {
+        this.tickets = data.tickets as unknown as Ticket[];
+        this.totalItems = data.count;
+      });
     }, error => {
       this.alertify.error('Failed to check ticket!');
     });
@@ -52,8 +56,13 @@ export class TicketVerificationComponent implements OnInit {
     const ticketForValidation = this.ticketId;
     this.controllerService.verificateTicket(ticketForValidation).subscribe(next => {
       this.validatedTicket = next as Ticket;
-      const indx = this.tickets.indexOf(this.tickets.find(ticket => ticket._id === this.validatedTicket._id));
-      this.tickets[indx].isValid = this.validatedTicket.isValid;
+      console.log(this.validatedTicket);
+      /* const indx = this.tickets.indexOf(this.tickets.find(ticket => ticket._id === this.validatedTicket._id));
+      this.tickets[indx].isValid = this.validatedTicket.isValid; */
+      this.controllerService.getTickets(this.itemsPerPage, this.currentPage).subscribe(data => {
+        this.tickets = data.tickets as unknown as Ticket[];
+        this.totalItems = data.count;
+      });
     }, error => {
       this.alertify.error('Failed to check ticket!');
     });

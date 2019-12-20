@@ -39,8 +39,12 @@ export class ViewPricelistComponent implements OnInit {
   removePricelist(pricelistId: string) {
     this.adminService.deletePricelist(pricelistId).subscribe(next => {
       this.alertify.success('Pricelist deleted');
-      const indx = this.allPricelists.indexOf(this.allPricelists.find(pr => pr._id === pricelistId));
-      this.allPricelists.splice(indx, 1);
+      /* const indx = this.allPricelists.indexOf(this.allPricelists.find(pr => pr._id === pricelistId));
+      this.allPricelists.splice(indx, 1); */
+      this.adminService.getPricelists(this.itemsPerPage, this.currentPage).subscribe(data => {
+        this.allPricelists = data.pricelists as unknown as PricelistItem[];
+        this.totalItems = data.count;
+      });
     }, error => {
       this.alertify.error('Failed to delete pricelist');
     });

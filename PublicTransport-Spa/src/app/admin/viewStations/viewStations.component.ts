@@ -39,8 +39,12 @@ export class ViewStationsComponent implements OnInit {
   deleteStation(stationId: string) {
     this.adminService.deleteStation(stationId).subscribe(next => {
       this.alertify.success('Station deleted');
-      const indx = this.allStations.indexOf(this.allStations.find(station => station._id === stationId));
-      this.allStations.splice(indx, 1);
+      /* const indx = this.allStations.indexOf(this.allStations.find(station => station._id === stationId));
+      this.allStations.splice(indx, 1); */
+      this.adminService.getStations(this.itemsPerPage, this.currentPage).subscribe(data => {
+        this.allStations = data.stations as unknown as Station[];
+        this.totalItems = data.count;
+      });
     }, error => {
       this.alertify.error('Failed to delete station');
     });

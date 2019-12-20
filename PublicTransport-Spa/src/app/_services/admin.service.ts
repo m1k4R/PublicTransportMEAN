@@ -30,6 +30,10 @@ getStations(pageSize: number, currentPage: number) {
   return this.http.get<{stations: Observable<Station[]>, count: number}>(this.baseUrl + 'admin/getStations' + queryParams);
 }
 
+getAllStations() {
+  return this.http.get<Observable<Station[]>>(this.baseUrl + 'admin/getAllStations');
+}
+
 getStation(stationId: string) {
   return this.http.get<Station>(this.baseUrl + 'admin/getStation/' + stationId);
 }
@@ -49,6 +53,10 @@ createNewLine(line: Line) {
 getLines(pageSize: number, currentPage: number) {
   const queryParams = `?pageSize=${pageSize}&currentPage=${currentPage}`;
   return this.http.get<{lines: Observable<Line[]>, count: number}>(this.baseUrl + 'admin/getLines' + queryParams);
+}
+
+getAllLines() {
+  return this.http.get<Observable<Line[]>>(this.baseUrl + 'admin/getAllLines');
 }
 
 getLine(lineId: string) {
@@ -103,6 +111,10 @@ createNewTimetable(timetable: TimeTable) {
 getTimetables(pageSize: number, currentPage: number) {
   const queryParams = `?pageSize=${pageSize}&currentPage=${currentPage}`;
   return this.http.get<{timetables: Observable<TimeTable[]>, count: number}>(this.baseUrl + 'admin/getTimetables' + queryParams);
+}
+
+getAllTimetables() {
+  return this.http.get<Observable<TimeTable[]>>(this.baseUrl + 'admin/getAllTimetables');
 }
 
 getTimetable(timetableId: string) {

@@ -39,7 +39,7 @@ export class NewLineComponent implements OnInit {
 
     this.router.data.subscribe(data => {
       this.allBuses = data.busses;
-      this.allStations = data.stations.stations;
+      this.allStations = data.stations;
     });
 
     const id = this.router.snapshot.paramMap.get('lineId');

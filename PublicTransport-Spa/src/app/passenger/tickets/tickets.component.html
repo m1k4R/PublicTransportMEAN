@@ -11,99 +11,114 @@
       </div>
       <!-- end of title -->
       <div class="row">
-        <div class="col-lg-3 col-sm-10 mx-auto mb-4"> <!-- *ngFor="let ticket of pricelists" -->
-          <div class="card moiClassTicketBorder">
-            <div class="card-body">
-              <div class="card-title">
-                <h3 class="text-muted font-weight-bolder">{{pricelists[0]?.item?.typeH}}</h3>
-              </div>
-              <hr>
-              <div class="card-subtitle">
-                <p class="lead">This ticket is valid just for one hour</p> <!-- {{pricelists.item?.description}} -->
-              </div>
-              <hr>
-              <div class="text-right d-inline">
-                <p class="font-weight-bold" color="black" style="font-size: 20px"><a href="#"
-                  ><i class="fa fa-ticket mx-2 text-primary moiClassTicketIcon"></i
-                ></a>{{pricelists[0]?.priceH}} RSD</p>
-              </div>
-              <!-- Buy ticket -->
-              <div class="text-center mt-2">
-                <button class="btn btn-default border-dark moiClassTicketHover"
-                (click)="buy(pricelists[0]?.item?.typeH, pricelists[0]?.priceH)"
-                >Buy Ticket</button>  <!-- [disabled]="ticket.item.type !== 'Hourly' && !loggedIn()" -->
-              </div> <!-- (click)="buyTicket(ticket.item.type)" -->
-            </div>
-          </div>
-          <div class="card moiClassTicketBorder">
-            <div class="card-body">
-              <div class="card-title">
-                <h3 class="text-muted font-weight-bolder">{{pricelists[0]?.item?.typeD}}</h3>
-              </div>
-              <hr>
-              <div class="card-subtitle">
-                <p class="lead">This ticket is valid until 00:00 next day</p> <!-- {{pricelists.item?.description}} -->
-              </div>
-              <hr>
-              <div class="text-right d-inline">
-                <p class="font-weight-bold" style="font-size: 20px"><a href="#"
-                  ><i class="fa fa-ticket mx-2 text-primary moiClassTicketIcon"></i
-                ></a>{{pricelists[0]?.priceD}} RSD</p>
-              </div>
-              <!-- Buy ticket -->
-              <div class="text-center mt-2">
-                <button class="btn btn-default border-dark moiClassTicketHover"
-                (click)="buy(pricelists[0]?.item?.typeD, pricelists[0]?.priceD)"
-                [disabled]="!loggedIn()">Buy Ticket</button>  <!-- [disabled]="ticket.item.type !== 'Hourly' && !loggedIn()" -->
-              </div> <!-- (click)="buyTicket(ticket.item.type)" -->
-            </div>
-          </div>
-          <div class="card moiClassTicketBorder">
-            <div class="card-body">
-              <div class="card-title">
-                <h3 class="text-muted font-weight-bolder">{{pricelists[0]?.item?.typeM}}</h3>
-              </div>
-              <hr>
-              <div class="card-subtitle">
-                <p class="lead">This ticket is valid for one month</p> <!-- {{pricelists.item?.description}} -->
-              </div>
-              <hr>
-              <div class="text-right d-inline">
-                <p class="font-weight-bold" style="font-size: 20px"><a href="#"
-                  ><i class="fa fa-ticket mx-2 text-primary moiClassTicketIcon"></i
-                ></a>{{pricelists[0]?.priceM}} RSD</p>
-              </div>
-              <!-- Buy ticket -->
-              <div class="text-center mt-2">
-                <button class="btn btn-default border-dark moiClassTicketHover"
-                (click)="buy(pricelists[0]?.item?.typeM, pricelists[0]?.priceM)"
-                [disabled]="!loggedIn()">Buy Ticket</button>  <!-- [disabled]="ticket.item.type !== 'Hourly' && !loggedIn()" -->
-              </div> <!-- (click)="buyTicket(ticket.item.type)" -->
-            </div>
-          </div>
-          <div class="card moiClassTicketBorder">
-            <div class="card-body">
-              <div class="card-title">
-                <h3 class="text-muted font-weight-bolder">{{pricelists[0]?.item?.typeA}}</h3>
-              </div>
-              <hr>
-              <div class="card-subtitle">
-                <p class="lead">This ticket is valid for one year</p> <!-- {{pricelists.item?.description}} -->
-              </div>
-              <hr>
-              <div class="text-right d-inline">
-                <p class="font-weight-bold" style="font-size: 20px"><a href="#"
-                  ><i class="fa fa-ticket mx-2 text-primary moiClassTicketIcon"></i
-                ></a>{{pricelists[0]?.priceA}} RSD</p>
-              </div>
-              <!-- Buy ticket -->
-              <div class="text-center mt-2">
-                <button class="btn btn-default border-dark moiClassTicketHover"
-                (click)="buy(pricelists[0]?.item?.typeA, pricelists[0]?.priceA)"
-                [disabled]="!loggedIn()">Buy Ticket</button>  <!-- [disabled]="ticket.item.type !== 'Hourly' && !loggedIn()" -->
-              </div> <!-- (click)="buyTicket(ticket.item.type)" -->
-            </div>
-          </div>
+        <div> <!-- *ngFor="let ticket of pricelists" -->  <!-- class="col-lg-3 col-sm-10 mx-auto mb-4" -->
+          <table class="table moiClassTimeTable">
+            <tbody>
+              <tr>
+                <td>
+                  <div class="card moiClassTicketBorder">
+                    <div class="card-body">
+                      <div class="card-title">
+                        <h3 class="text-muted font-weight-bolder">{{pricelists[0]?.item?.typeH}}</h3>
+                      </div>
+                      <hr>
+                      <div class="card-subtitle">
+                        <p class="lead">This ticket is valid just for one hour</p> <!-- {{pricelists.item?.description}} -->
+                      </div>
+                      <hr>
+                      <div class="text-right d-inline">
+                        <p class="font-weight-bold" color="black" style="font-size: 20px"><a href="#"
+                          ><i class="fa fa-ticket mx-2 text-primary moiClassTicketIcon"></i
+                        ></a>{{pricelists[0]?.priceH}} RSD</p>
+                      </div>
+                      <!-- Buy ticket -->
+                      <div class="text-center mt-2">
+                        <button class="btn btn-default border-dark moiClassTicketHover"
+                        (click)="buy(pricelists[0]?.item?.typeH, pricelists[0]?.priceH)"
+                        >Buy Ticket</button>  <!-- [disabled]="ticket.item.type !== 'Hourly' && !loggedIn()" -->
+                      </div> <!-- (click)="buyTicket(ticket.item.type)" -->
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="card moiClassTicketBorder">
+                    <div class="card-body">
+                      <div class="card-title">
+                        <h3 class="text-muted font-weight-bolder">{{pricelists[0]?.item?.typeD}}</h3>
+                      </div>
+                      <hr>
+                      <div class="card-subtitle">
+                        <p class="lead">This ticket is valid until 00:00 next day</p> <!-- {{pricelists.item?.description}} -->
+                      </div>
+                      <hr>
+                      <div class="text-right d-inline">
+                        <p class="font-weight-bold" style="font-size: 20px"><a href="#"
+                          ><i class="fa fa-ticket mx-2 text-primary moiClassTicketIcon"></i
+                        ></a>{{pricelists[0]?.priceD}} RSD</p>
+                      </div>
+                      <!-- Buy ticket -->
+                      <div class="text-center mt-2">
+                        <button class="btn btn-default border-dark moiClassTicketHover"
+                        (click)="buy(pricelists[0]?.item?.typeD, pricelists[0]?.priceD)"
+                        [disabled]="!loggedIn()">Buy Ticket</button>  <!-- [disabled]="ticket.item.type !== 'Hourly' && !loggedIn()" -->
+                      </div> <!-- (click)="buyTicket(ticket.item.type)" -->
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="card moiClassTicketBorder">
+                    <div class="card-body">
+                      <div class="card-title">
+                        <h3 class="text-muted font-weight-bolder">{{pricelists[0]?.item?.typeM}}</h3>
+                      </div>
+                      <hr>
+                      <div class="card-subtitle">
+                        <p class="lead">This ticket is valid for one month</p> <!-- {{pricelists.item?.description}} -->
+                      </div>
+                      <hr>
+                      <div class="text-right d-inline">
+                        <p class="font-weight-bold" style="font-size: 20px"><a href="#"
+                          ><i class="fa fa-ticket mx-2 text-primary moiClassTicketIcon"></i
+                        ></a>{{pricelists[0]?.priceM}} RSD</p>
+                      </div>
+                      <!-- Buy ticket -->
+                      <div class="text-center mt-2">
+                        <button class="btn btn-default border-dark moiClassTicketHover"
+                        (click)="buy(pricelists[0]?.item?.typeM, pricelists[0]?.priceM)"
+                        [disabled]="!loggedIn()">Buy Ticket</button>  <!-- [disabled]="ticket.item.type !== 'Hourly' && !loggedIn()" -->
+                      </div> <!-- (click)="buyTicket(ticket.item.type)" -->
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="card moiClassTicketBorder">
+                    <div class="card-body">
+                      <div class="card-title">
+                        <h3 class="text-muted font-weight-bolder">{{pricelists[0]?.item?.typeA}}</h3>
+                      </div>
+                      <hr>
+                      <div class="card-subtitle">
+                        <p class="lead">This ticket is valid for one year</p> <!-- {{pricelists.item?.description}} -->
+                      </div>
+                      <hr>
+                      <div class="text-right d-inline">
+                        <p class="font-weight-bold" style="font-size: 20px"><a href="#"
+                          ><i class="fa fa-ticket mx-2 text-primary moiClassTicketIcon"></i
+                        ></a>{{pricelists[0]?.priceA}} RSD</p>
+                      </div>
+                      <!-- Buy ticket -->
+                      <div class="text-center mt-2">
+                        <button class="btn btn-default border-dark moiClassTicketHover"
+                        (click)="buy(pricelists[0]?.item?.typeA, pricelists[0]?.priceA)"
+                        [disabled]="!loggedIn()">Buy Ticket</button>  <!-- [disabled]="ticket.item.type !== 'Hourly' && !loggedIn()" -->
+                      </div> <!-- (click)="buyTicket(ticket.item.type)" -->
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        
         </div>
       </div>
       <br>

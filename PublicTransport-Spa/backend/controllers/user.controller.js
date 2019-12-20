@@ -235,9 +235,9 @@ userController.getUsers = async (req, res) => {
   //console.log(pageSize);
   //console.log(currentPage);
 
-  const count = await (await UserModel.find()).length;
+  const count = await (await UserModel.find({userRole: 'Passenger'})).length;
   console.log(count);
-  const users = await UserModel.find()
+  const users = await UserModel.find({userRole: 'Passenger'})
                                 .skip(pageSize * (currentPage - 1))
                                 .limit(pageSize)
                                 .then(users => {
